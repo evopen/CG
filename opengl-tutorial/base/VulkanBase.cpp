@@ -126,16 +126,14 @@ void VulkanBase::pickPhysicalDevice()
 	{
 		VkPhysicalDeviceProperties properties;
 		vkGetPhysicalDeviceProperties(device, &properties);
+		std::cout << properties.deviceName << properties.deviceType << "\n";
 		if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
 		{
 			physicalDevice = device;
-			break;
-		}
-		else
-		{
-			throw std::runtime_error("failed to find discrete gpu");
+			return;
 		}
 	}
+	throw std::runtime_error("failed to find discrete gpu");
 }
 
 void VulkanBase::findQueueFamilyIndex()
