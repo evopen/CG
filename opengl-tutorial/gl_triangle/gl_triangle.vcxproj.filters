@@ -10,54 +10,36 @@
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Shaders">
-      <UniqueIdentifier>{bfd9acc2-7b26-4b3b-9a1e-34421c1dce4a}</UniqueIdentifier>
+      <UniqueIdentifier>{976956ad-5830-4ca6-b76d-19eb4bc224e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VulkanBase.cpp">
+    <ClCompile Include="triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="base_test.cpp">
+    <ClCompile Include="shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanDebug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanTool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanShader.cpp">
+    <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VulkanBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanDebug.h">
+    <ClInclude Include="shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VulkanType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanTool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanShader.h">
+    <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\shader.vert">
+    <None Include="shader.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="shaders\shader.frag">
+    <None Include="shader.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

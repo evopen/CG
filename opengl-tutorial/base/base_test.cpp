@@ -13,9 +13,7 @@
 #include "data.h"
 #include <iostream>
 #include "VulkanType.h"
-
-const int VertexBindingCount = 1;
-const int VertexAttrCount = 2;
+#include "VulkanShader.h"
 
 
 class Triangle : public VulkanBase
@@ -53,7 +51,7 @@ private:
 	void loadModel()
 	{
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile("models/treasure_smooth.dae",
+		const aiScene* scene = importer.ReadFile("./models/treasure_smooth.dae",
 		                                         aiProcess_FlipWindingOrder | aiProcess_Triangulate |
 		                                         aiProcess_PreTransformVertices | aiProcess_CalcTangentSpace |
 		                                         aiProcess_GenSmoothNormals);
@@ -80,8 +78,8 @@ private:
 				indices.push_back(indexBase + face.mIndices[2]);
 			}
 		}
-		// std::cout << vertices.size() << "\n" << vertices[8000];
-		std::cout << indices.size() << "\n";
+
+		std::cout << scene->mMaterials[0]->GetName().C_Str() << "\n";
 	}
 
 	void createDescriptorPool()
@@ -141,8 +139,10 @@ private:
 
 	void createGraphicsPipeline()
 	{
-		VkShaderModule vertShaderModule = engine::tool::createShaderModule(device, "shaders/vert.spv");
-		VkShaderModule fragShaderModule = engine::tool::createShaderModule(device, "shaders/frag.spv");
+		Shader vertexShader("shaders/shader.vert");
+		Shader fragShader("shaders/shader.frag");
+		VkShaderModule vertShaderModule = vertexShader.createShaderModule(device);
+		VkShaderModule fragShaderModule = fragShader.createShaderModule(device);
 
 		VkPipelineShaderStageCreateInfo vertShaderStageInfo = {};
 		vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -158,20 +158,24 @@ private:
 
 		VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
 
+		/// input manually
+		const int VertexBindingCount = 1;
+
 		std::array<VkVertexInputBindingDescription, VertexBindingCount> vertexInputBindingDescriptions;
 		vertexInputBindingDescriptions[0].binding = 0;
 		vertexInputBindingDescriptions[0].inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 		vertexInputBindingDescriptions[0].stride = sizeof(Vertex);
 
-		std::array<VkVertexInputAttributeDescription, VertexAttrCount> vertexInputAttributeDescriptions;
+		std::vector<VkVertexInputAttributeDescription> vertexInputAttributeDescriptions(vertexShader.attributeCount);
+		for (int i = 0; i < vertexInputAttributeDescriptions.size(); i++)
+		{
+			vertexInputAttributeDescriptions[i].format = vertexShader.attributeFormats[i];
+			vertexInputAttributeDescriptions[i].location = i;
+		}
+
+		/// input manually
 		vertexInputAttributeDescriptions[0].binding = 0;
-		vertexInputAttributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-		vertexInputAttributeDescriptions[0].location = 0;
-		vertexInputAttributeDescriptions[0].offset = offsetof(Vertex, position);
-		vertexInputAttributeDescriptions[1].binding = 0;
-		vertexInputAttributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-		vertexInputAttributeDescriptions[1].location = 1;
-		vertexInputAttributeDescriptions[1].offset = offsetof(Vertex, color);
+		vertexInputAttributeDescriptions[0].offset = 0;
 
 		VkPipelineVertexInputStateCreateInfo vertexInputState = {};
 		vertexInputState.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
@@ -385,9 +389,15 @@ private:
 
 int main(int argc, char* argv[])
 {
-	Triangle app(true);
-	app.prepare();
-
-	app.loop();
+	try
+	{
+		Triangle app(true);
+		app.prepare();
+		app.loop();
+	}
+	catch (std::runtime_error e)
+	{
+		std::cout << "Runtime Error: " << e.what();
+	}
 	return 0;
 }

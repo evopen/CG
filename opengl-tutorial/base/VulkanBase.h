@@ -8,6 +8,7 @@
 #include <vector>
 #include <optional>
 #include "VulkanType.h"
+#include <iostream>
 
 
 const std::vector<const char*> deviceExtensions = {

@@ -2,6 +2,8 @@
 #include <vulkan/vulkan.h>
 #include <vk_mem_alloc.h>
 #include <string>
+#include <ios>
+#include <vector>
 
 namespace engine
 {
@@ -17,9 +19,12 @@ namespace engine
 		void createBuffer(VmaAllocator allocator, VkDeviceSize size, VkBufferUsageFlags usage,
 		                  VmaMemoryUsage memoryUsage, VkBuffer& buffer,
 		                  VmaAllocation& allocation);
-		void createVertexInputBuffer(VmaAllocator allocator, VkDeviceSize size, bool staging, VkBuffer & buffer, VmaAllocation allocation,
-		                        void* data);
-		void createIndexInputBuffer(VmaAllocator allocator, VkDeviceSize size, bool staging, VkBuffer & buffer, VmaAllocation allocation,
-		                        void* data);
+		void createVertexInputBuffer(VmaAllocator allocator, VkDeviceSize size, bool staging, VkBuffer& buffer,
+		                             VmaAllocation allocation,
+		                             void* data);
+		void createIndexInputBuffer(VmaAllocator allocator, VkDeviceSize size, bool staging, VkBuffer& buffer,
+		                            VmaAllocation allocation,
+		                            void* data);
+		std::vector<char> readFile(const std::string& filename, std::ios_base::openmode mode);
 	}
 }

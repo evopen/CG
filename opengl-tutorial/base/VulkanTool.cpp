@@ -115,20 +115,7 @@ void engine::tool::createImage(VmaAllocator allocator, uint32_t width, uint32_t 
 
 VkShaderModule engine::tool::createShaderModule(VkDevice device, const std::string& filename)
 {
-	std::ifstream file(filename, std::ios::ate | std::ios::binary);
-
-	if (!file.is_open())
-	{
-		throw std::runtime_error("failed to open file!");
-	}
-
-	size_t fileSize = (size_t)file.tellg();
-	std::vector<char> buffer(fileSize);
-
-	file.seekg(0);
-	file.read(buffer.data(), fileSize);
-
-	file.close();
+	auto buffer = readFile(filename, std::ios::binary);
 
 	VkShaderModuleCreateInfo createInfo = {};
 	createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
@@ -176,7 +163,7 @@ void engine::tool::createVertexInputBuffer(VmaAllocator allocator, VkDeviceSize 
 }
 
 void engine::tool::createIndexInputBuffer(VmaAllocator allocator, VkDeviceSize size, bool staging, VkBuffer& buffer,
-	VmaAllocation allocation, void* data)
+                                          VmaAllocation allocation, void* data)
 {
 	createBuffer(allocator, size, VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VMA_MEMORY_USAGE_CPU_ONLY, buffer, allocation);
 
@@ -184,4 +171,18 @@ void engine::tool::createIndexInputBuffer(VmaAllocator allocator, VkDeviceSize s
 	vmaMapMemory(allocator, allocation, &p);
 	memcpy(p, data, size);
 	vmaUnmapMemory(allocator, allocation);
+}
+
+std::vector<char> engine::tool::readFile(const std::string& filename, std::ios_base::openmode mode)
+{
+	std::ifstream file(filename, std::ios::ate | mode);
+	if (!file.is_open())
+	{
+		throw std::runtime_error("failed to open file");
+	}
+	size_t size = file.tellg();
+	std::vector<char> buffer(size);
+	file.seekg(0);
+	file.read(buffer.data(), size);
+	return buffer;
 }

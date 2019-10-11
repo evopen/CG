@@ -1,8 +1,10 @@
 #version 450
 
 layout(location = 0) in vec3 inColor;
-layout(location = 0) out vec3 outColor;
+layout(location = 0) out vec4 outColor;
+layout(binding = 1) uniform sampler2D texSampler;
+
 
 void main() {
-    outColor = vec3(inColor);
+    outColor = texture(texSampler, inColor.xy);
 }
