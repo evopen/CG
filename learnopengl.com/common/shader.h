@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <glm/glm.hpp>
 
 class Shader
 {
@@ -98,6 +99,18 @@ public:
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void setVec3(const std::string& name, float a, float b, float c)
+	{
+		GLint location = glGetUniformLocation(programID, name.c_str());
+		glUniform3f(location, a, b, c);
+	}
+	
+	void setVec3(const std::string& name, glm::vec3 &vec3)
+	{
+		GLint location = glGetUniformLocation(programID, name.c_str());
+		glUniform3fv(location, 1, &vec3[0]);
 	}
 
 	GLuint programID;

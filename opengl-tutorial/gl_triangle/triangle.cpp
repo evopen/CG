@@ -6,6 +6,7 @@
 
 #include "shader.h"
 #include "data.h"
+#include <iostream>
 
 
 GLFWwindow* window;
@@ -53,6 +54,7 @@ void init()
 
 void processInput()
 {
+	std::cout << lastX << "\n";
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
