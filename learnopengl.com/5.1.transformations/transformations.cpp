@@ -153,8 +153,7 @@ int main(int argc, char* argv[])
 
 		float currentTime = glfwGetTime();
 		float color = sin(currentTime) / 2.f + 0.5f;
-		shader.setFloat("green", color);
-		shader.setFloat("horizontal_offset", color - 0.5);
+
 		shader.setFloat("visibility", visibility);
 
 		/// transform
