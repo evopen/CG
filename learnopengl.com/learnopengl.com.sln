@@ -3,89 +3,89 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.1.hello_window", "1.1.hello_window\1.1.hello_window.vcxproj", "{56A78038-F539-4B27-A7ED-4C3674651C12}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.1.hello_window", "src\1.getting_started\1.1.hello_window\1.1.hello_window.vcxproj", "{56A78038-F539-4B27-A7ED-4C3674651C12}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.hello_triangle", "2.1.hello_triangle\2.1.hello_triangle.vcxproj", "{0DCD38E9-0066-440F-9E53-6C42857DE7B5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.hello_triangle", "src\1.getting_started\2.1.hello_triangle\2.1.hello_triangle.vcxproj", "{0DCD38E9-0066-440F-9E53-6C42857DE7B5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.2.hello_triangle_indexed", "2.2.hello_triangle_indexed\2.2.hello_triangle_indexed.vcxproj", "{7575C966-9163-47B2-84BE-A5C874088986}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.2.hello_triangle_indexed", "src\1.getting_started\2.2.hello_triangle_indexed\2.2.hello_triangle_indexed.vcxproj", "{7575C966-9163-47B2-84BE-A5C874088986}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.3.hello_triangle_execise1", "2.3.hello_triangle_execise1\2.3.hello_triangle_execise1.vcxproj", "{87F1F257-AE4F-49B3-AFCB-E3A8293B26B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.3.hello_triangle_execise1", "src\1.getting_started\2.3.hello_triangle_execise1\2.3.hello_triangle_execise1.vcxproj", "{87F1F257-AE4F-49B3-AFCB-E3A8293B26B1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.4.hello_triangle_execise2", "2.4.hello_triangle_execise2\2.4.hello_triangle_execise2.vcxproj", "{3F935D14-CD2D-402A-8B96-8E9FDC3612CC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.4.hello_triangle_execise2", "src\1.getting_started\2.4.hello_triangle_execise2\2.4.hello_triangle_execise2.vcxproj", "{3F935D14-CD2D-402A-8B96-8E9FDC3612CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.5.hello_triangle_execise3", "2.5.hello_triangle_execise3\2.5.hello_triangle_execise3.vcxproj", "{5F6130F2-E812-4B42-A3A7-3ABD24A35ABC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.5.hello_triangle_execise3", "src\1.getting_started\2.5.hello_triangle_execise3\2.5.hello_triangle_execise3.vcxproj", "{5F6130F2-E812-4B42-A3A7-3ABD24A35ABC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.shaders_uniform", "3.1.shaders_uniform\3.1.shaders_uniform.vcxproj", "{88B38BDE-04DF-483B-8B2D-499417DC1FB8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.shaders_uniform", "src\1.getting_started\3.1.shaders_uniform\3.1.shaders_uniform.vcxproj", "{88B38BDE-04DF-483B-8B2D-499417DC1FB8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.2.shaders_interpolation", "3.2.shaders_interpolation\3.2.shaders_interpolation.vcxproj", "{2CEB41B1-5235-4014-924F-1497ADFFBBC2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.2.shaders_interpolation", "src\1.getting_started\3.2.shaders_interpolation\3.2.shaders_interpolation.vcxproj", "{2CEB41B1-5235-4014-924F-1497ADFFBBC2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.3.shaders_class", "3.3.shaders_class\3.3.shaders_class.vcxproj", "{C6B29A21-3C71-4A31-829F-2BA29F9B40ED}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.3.shaders_class", "src\1.getting_started\3.3.shaders_class\3.3.shaders_class.vcxproj", "{C6B29A21-3C71-4A31-829F-2BA29F9B40ED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4.shaders_execise1", "3.4.shaders_execise1\3.4.shaders_execise1.vcxproj", "{9EDA2047-4776-4AE6-8895-621B5C5BB5DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4.shaders_execise1", "src\1.getting_started\3.4.shaders_execise1\3.4.shaders_execise1.vcxproj", "{9EDA2047-4776-4AE6-8895-621B5C5BB5DB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.5.shaders_execise2", "3.5.shaders_execise2\3.5.shaders_execise2.vcxproj", "{232BA6AE-EE49-403E-9C6A-A276CF4DEDF7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.5.shaders_execise2", "src\1.getting_started\3.5.shaders_execise2\3.5.shaders_execise2.vcxproj", "{232BA6AE-EE49-403E-9C6A-A276CF4DEDF7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6.shaders_execise3", "3.6.shaders_execise3\3.6.shaders_execise3.vcxproj", "{53AAD090-6286-4532-9660-E19BFA304728}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6.shaders_execise3", "src\1.getting_started\3.6.shaders_execise3\3.6.shaders_execise3.vcxproj", "{53AAD090-6286-4532-9660-E19BFA304728}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.textures", "4.1.textures\4.1.textures.vcxproj", "{5178AAE9-ADFE-4876-A459-ED2B803C7E93}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.textures", "src\1.getting_started\4.1.textures\4.1.textures.vcxproj", "{5178AAE9-ADFE-4876-A459-ED2B803C7E93}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.textures_combined", "4.2.textures_combined\4.2.textures_combined.vcxproj", "{D5FF5EFC-4999-4AAE-8F8D-FA7CC87ABE97}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.textures_combined", "src\1.getting_started\4.2.textures_combined\4.2.textures_combined.vcxproj", "{D5FF5EFC-4999-4AAE-8F8D-FA7CC87ABE97}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.textures_execise1", "4.3.textures_execise1\4.3.textures_execise1.vcxproj", "{F6F63BFA-765E-47CD-B8E4-7FD4A0E9CB0C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.textures_execise1", "src\1.getting_started\4.3.textures_execise1\4.3.textures_execise1.vcxproj", "{F6F63BFA-765E-47CD-B8E4-7FD4A0E9CB0C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.textures_execise2", "4.4.textures_execise2\4.4.textures_execise2.vcxproj", "{12056CC4-8E9D-45B0-9FC5-BC7384212168}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.textures_execise2", "src\1.getting_started\4.4.textures_execise2\4.4.textures_execise2.vcxproj", "{12056CC4-8E9D-45B0-9FC5-BC7384212168}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.5.textures_execise3", "4.5.textures_execise3\4.5.textures_execise3.vcxproj", "{B0638D6A-2AB2-4B1E-BA2F-C23A2D90969C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.5.textures_execise3", "src\1.getting_started\4.5.textures_execise3\4.5.textures_execise3.vcxproj", "{B0638D6A-2AB2-4B1E-BA2F-C23A2D90969C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.6.textures_execise4", "4.6.textures_execise4\4.6.textures_execise4.vcxproj", "{DBBE42EC-5C49-481B-9346-A8ECA8D78FA3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.6.textures_execise4", "src\1.getting_started\4.6.textures_execise4\4.6.textures_execise4.vcxproj", "{DBBE42EC-5C49-481B-9346-A8ECA8D78FA3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.transformations", "5.1.transformations\5.1.transformations.vcxproj", "{25AC995B-8C38-4D17-BE6D-90917E338B6E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.transformations", "src\1.getting_started\5.1.transformations\5.1.transformations.vcxproj", "{25AC995B-8C38-4D17-BE6D-90917E338B6E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.transformations_execise2", "5.2.transformations_execise2\5.2.transformations_execise2.vcxproj", "{D7888AAC-1069-4510-A778-2D0928EBE7A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.transformations_execise2", "src\1.getting_started\5.2.transformations_execise2\5.2.transformations_execise2.vcxproj", "{D7888AAC-1069-4510-A778-2D0928EBE7A6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1.coordinate_systems", "6.1.coordinate_systems\6.1.coordinate_systems.vcxproj", "{40D68F6C-24C3-44C9-BAF9-82F0524BEF41}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1.coordinate_systems", "src\1.getting_started\6.1.coordinate_systems\6.1.coordinate_systems.vcxproj", "{40D68F6C-24C3-44C9-BAF9-82F0524BEF41}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.coordinate_systems_depth", "6.2.coordinate_systems_depth\6.2.coordinate_systems_depth.vcxproj", "{F268DD79-DADB-4F73-95B9-F30FA2AD0D1A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.coordinate_systems_depth", "src\1.getting_started\6.2.coordinate_systems_depth\6.2.coordinate_systems_depth.vcxproj", "{F268DD79-DADB-4F73-95B9-F30FA2AD0D1A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.3.coordinate_systems_multiple", "6.3.coordinate_systems_multiple\6.3.coordinate_systems_multiple.vcxproj", "{C89F3172-F3BD-48FF-A836-AE5CA478C67E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.3.coordinate_systems_multiple", "src\1.getting_started\6.3.coordinate_systems_multiple\6.3.coordinate_systems_multiple.vcxproj", "{C89F3172-F3BD-48FF-A836-AE5CA478C67E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.1.camera_circle", "7.1.camera_circle\7.1.camera_circle.vcxproj", "{42AE1ABD-63A0-42A0-BD41-0A0EB60653F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.1.camera_circle", "src\1.getting_started\7.1.camera_circle\7.1.camera_circle.vcxproj", "{42AE1ABD-63A0-42A0-BD41-0A0EB60653F5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.2.camera_keyboard_dt", "7.2.camera_keyboard_dt\7.2.camera_keyboard_dt.vcxproj", "{CF32AFAD-CBF6-43B7-812C-DF63CD54634B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.2.camera_keyboard_dt", "src\1.getting_started\7.2.camera_keyboard_dt\7.2.camera_keyboard_dt.vcxproj", "{CF32AFAD-CBF6-43B7-812C-DF63CD54634B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.3.camera_mouse_zoom", "7.3.camera_mouse_zoom\7.3.camera_mouse_zoom.vcxproj", "{08990A0F-ABA2-43FB-A8F5-A87E11FFB792}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.3.camera_mouse_zoom", "src\1.getting_started\7.3.camera_mouse_zoom\7.3.camera_mouse_zoom.vcxproj", "{08990A0F-ABA2-43FB-A8F5-A87E11FFB792}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.4.camera_class", "7.4.camera_class\7.4.camera_class.vcxproj", "{02A28E2B-7971-4936-B719-4BA457A05FB2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7.4.camera_class", "src\1.getting_started\7.4.camera_class\7.4.camera_class.vcxproj", "{02A28E2B-7971-4936-B719-4BA457A05FB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.getting_started", "1.getting_started", "{064CC275-D2EA-4DFF-9DBA-9CCAF9517252}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.colors", "1.colors\1.colors.vcxproj", "{2B1EEBF5-16AC-4F99-9B5E-B74D6B28471C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.colors", "src\2.lighting\1.colors\1.colors.vcxproj", "{2B1EEBF5-16AC-4F99-9B5E-B74D6B28471C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.basic_lighting_diffuse", "2.1.basic_lighting_diffuse\2.1.basic_lighting_diffuse.vcxproj", "{0101F226-ED37-4928-B714-B1CD66541EF0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.basic_lighting_diffuse", "src\2.lighting\2.1.basic_lighting_diffuse\2.1.basic_lighting_diffuse.vcxproj", "{0101F226-ED37-4928-B714-B1CD66541EF0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.2.basic_lighting_specular", "2.2.basic_lighting_specular\2.2.basic_lighting_specular.vcxproj", "{D70D76E4-AC21-41B2-8F65-0E9DAF35B321}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.2.basic_lighting_specular", "src\2.lighting\2.2.basic_lighting_specular\2.2.basic_lighting_specular.vcxproj", "{D70D76E4-AC21-41B2-8F65-0E9DAF35B321}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.materials", "3.1.materials\3.1.materials.vcxproj", "{48786809-0664-42A4-9AB7-8F837C2C641A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.materials", "src\2.lighting\3.1.materials\3.1.materials.vcxproj", "{48786809-0664-42A4-9AB7-8F837C2C641A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.light_maps_diffuse_map", "4.1.light_maps_diffuse_map\4.1.light_maps_diffuse_map.vcxproj", "{FD8C5613-1120-430D-B08E-3B9A7FF529FB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.light_maps_diffuse_map", "src\2.lighting\4.1.light_maps_diffuse_map\4.1.light_maps_diffuse_map.vcxproj", "{FD8C5613-1120-430D-B08E-3B9A7FF529FB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.light_maps_specular_map", "4.2.light_maps_specular_map\4.2.light_maps_specular_map.vcxproj", "{E3FA58E5-D910-41DC-866E-F65A79FEB78D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.light_maps_specular_map", "src\2.lighting\4.2.light_maps_specular_map\4.2.light_maps_specular_map.vcxproj", "{E3FA58E5-D910-41DC-866E-F65A79FEB78D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.light_maps_execise3", "4.3.light_maps_execise3\4.3.light_maps_execise3.vcxproj", "{924285CA-7847-4453-9C3D-2A13AF7B5256}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.light_maps_execise3", "src\2.lighting\4.3.light_maps_execise3\4.3.light_maps_execise3.vcxproj", "{924285CA-7847-4453-9C3D-2A13AF7B5256}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.light_maps_execise4", "4.4.light_maps_execise4\4.4.light_maps_execise4.vcxproj", "{8CA10548-45F0-4103-B92A-9B5D9FDA6DB5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.light_maps_execise4", "src\2.lighting\4.4.light_maps_execise4\4.4.light_maps_execise4.vcxproj", "{8CA10548-45F0-4103-B92A-9B5D9FDA6DB5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.light_casters_directional", "5.1.light_casters_directional\5.1.light_casters_directional.vcxproj", "{67EFA3DC-A954-40F7-948F-FDF52B86534A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.light_casters_directional", "src\2.lighting\5.1.light_casters_directional\5.1.light_casters_directional.vcxproj", "{67EFA3DC-A954-40F7-948F-FDF52B86534A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.light_casters_point", "5.2.light_casters_point\5.2.light_casters_point.vcxproj", "{031F8E6B-3CA1-4193-AE7B-829EF0248535}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.light_casters_point", "src\2.lighting\5.2.light_casters_point\5.2.light_casters_point.vcxproj", "{031F8E6B-3CA1-4193-AE7B-829EF0248535}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.3.light_casters_spot", "5.3.light_casters_spot\5.3.light_casters_spot.vcxproj", "{B4DD6B4B-677C-4EE3-B9DA-E993F9555F99}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.3.light_casters_spot", "src\2.lighting\5.3.light_casters_spot\5.3.light_casters_spot.vcxproj", "{B4DD6B4B-677C-4EE3-B9DA-E993F9555F99}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.4.light_casters_spot_soft", "5.4.light_casters_spot_soft\5.4.light_casters_spot_soft.vcxproj", "{8D69C0BF-49D0-4C4E-AC2B-5879564A1DE7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.4.light_casters_spot_soft", "src\2.lighting\5.4.light_casters_spot_soft\5.4.light_casters_spot_soft.vcxproj", "{8D69C0BF-49D0-4C4E-AC2B-5879564A1DE7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.multiple_lights", "6.multiple_lights\6.multiple_lights.vcxproj", "{AAFB82A1-27FF-46BA-BF6B-C37C25013F5A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1.multiple_lights", "src\2.lighting\6.1.multiple_lights\6.1.multiple_lights.vcxproj", "{AAFB82A1-27FF-46BA-BF6B-C37C25013F5A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.multiple_lights_execise1", "6.2.multiple_lights_execise1\6.2.multiple_lights_execise1.vcxproj", "{0F446183-C94B-466F-8B90-F6CADE9EEEF1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.multiple_lights_execise1", "src\2.lighting\6.2.multiple_lights_execise1\6.2.multiple_lights_execise1.vcxproj", "{0F446183-C94B-466F-8B90-F6CADE9EEEF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
