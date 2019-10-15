@@ -21,7 +21,7 @@ class Mesh
 {
 public:
 	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
+	std::vector<uint32_t> indices;
 	std::vector<Texture> textures;
 
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned>& indices,
@@ -48,12 +48,12 @@ inline void Mesh::Draw(Shader shader)
 	for (uint32_t i = 0; i < textures.size(); i++)
 	{
 		std::string number;
-		if(textures[i].type == "texture_diffuse")
+		if (textures[i].type == "texture_diffuse")
 			number = std::to_string(diffuseNr++);
-		else if(textures[i].type == "texture_specular")
+		else if (textures[i].type == "texture_specular")
 			number = std::to_string(specularNr++);
 
-		shader.setInt(("material" + textures[i].type + number), i);
+		shader.setInt(("material." + textures[i].type + number), i);
 		glBindTextureUnit(i, textures[i].id);
 	}
 	glBindVertexArray(VAO);
@@ -66,7 +66,7 @@ inline void Mesh::setupMesh()
 	glNamedBufferData(VBO, sizeof(Vertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
 	glCreateBuffers(1, &EBO);
-	glNamedBufferData(EBO, sizeof(indices) * indices.size(), indices.data(), GL_STATIC_DRAW);
+	glNamedBufferData(EBO, sizeof(uint32_t) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
 	glCreateVertexArrays(1, &VAO);
 
@@ -81,7 +81,7 @@ inline void Mesh::setupMesh()
 	glVertexArrayAttribFormat(VAO, 1, 3, GL_FLOAT, GL_FALSE, offsetof(Vertex, Normal));
 	glVertexArrayAttribFormat(VAO, 2, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, TexCoords));
 
-	glEnableVertexArrayAttrib(VAO, 0);
-	glEnableVertexArrayAttrib(VAO, 1);
-	glEnableVertexArrayAttrib(VAO, 2);
+	glVertexArrayAttribBinding(VAO, 0, 0);
+	glVertexArrayAttribBinding(VAO, 1, 0);
+	glVertexArrayAttribBinding(VAO, 2, 0);
 }

@@ -166,7 +166,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory)
 		else if (nrComponents == 4)
 			format = GL_RGBA;
 
-		glTextureStorage2D(textureID, 1, format, width, height);
+		glTextureStorage2D(textureID, 1, GL_RGB8, width, height);
 		glTextureSubImage2D(textureID, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);
 
 		glGenerateTextureMipmap(textureID);

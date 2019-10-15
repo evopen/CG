@@ -183,7 +183,7 @@ void init()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -196,7 +196,16 @@ void init()
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetWindowPos(window, 500, 200);
 
-	gladLoadGL();
+	if (!gladLoadGL())
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+	}
+	printf("OpenGL loaded\n");
+
+	printf("Vendor:          %s\n", glGetString(GL_VENDOR));
+	printf("Renderer:        %s\n", glGetString(GL_RENDERER));
+	printf("Version OpenGL:  %s\n", glGetString(GL_VERSION));
+	printf("Version GLSL:    %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 	glViewport(0, 0, 800, 600);
 }
@@ -207,10 +216,10 @@ int main(int argc, char* argv[])
 	init();
 
 
-	Model model("../../../resources/objects/nanosuit/nanosuit.obj");
+	Model myModel("D:/Dev/Computer Graphics/learnopengl.com/resources/objects/nanosuit/nanosuit.obj");
 
 
-	Shader shader("shader.vert", "shader.frag");
+	Shader shader("D:/Dev/Computer Graphics/learnopengl.com/src/3.model_loading/1.model_loading/shader.vert", "D:/Dev/Computer Graphics/learnopengl.com/src/3.model_loading/1.model_loading/shader.frag");
 
 	GLuint diffuseTexture;
 	GLuint specularTexture;
@@ -233,7 +242,9 @@ int main(int argc, char* argv[])
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-		
+
+		myModel.Draw(shader);
+
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
