@@ -207,7 +207,7 @@ int main(int argc, char* argv[])
 	init();
 
 
-	Model model("D:/Dev/Computer Graphics/learnopengl.com/resources/objects/nanosuit/nanosuit.obj");
+	Model model("../../../resources/objects/nanosuit/nanosuit.obj");
 
 
 	Shader shader("shader.vert", "shader.frag");
