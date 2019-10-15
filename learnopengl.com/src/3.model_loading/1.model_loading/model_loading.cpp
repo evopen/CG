@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <camera.h>
 #include <model.h>
+#include <filesystem.h>
 
 GLFWwindow* window;
 glm::vec3 lightPos(5.f, 3.f, -2.f);
@@ -216,13 +217,10 @@ int main(int argc, char* argv[])
 	init();
 
 
-	Model myModel("D:/Dev/Computer Graphics/learnopengl.com/resources/objects/nanosuit/nanosuit.obj");
+	Model myModel(filesystem::getResourcesPath() + "objects/nanosuit/nanosuit.obj");
 
+	Shader shader("shader.vert", "shader.frag");
 
-	Shader shader("D:/Dev/Computer Graphics/learnopengl.com/src/3.model_loading/1.model_loading/shader.vert", "D:/Dev/Computer Graphics/learnopengl.com/src/3.model_loading/1.model_loading/shader.frag");
-
-	GLuint diffuseTexture;
-	GLuint specularTexture;
 
 	while (!glfwWindowShouldClose(window))
 	{

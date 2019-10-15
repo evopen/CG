@@ -6,6 +6,7 @@
 #include <vector>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include <filesystem>
 
 unsigned int TextureFromFile(const char* path, const std::string& directory);
 
@@ -46,7 +47,7 @@ inline void Model::loadModel(std::string path)
 		std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
 		return;
 	}
-	directory = path.substr(0, path.find_last_of('/'));
+	directory = std::filesystem::path(path).parent_path().string();
 	processNode(scene->mRootNode, scene);
 }
 
