@@ -5,6 +5,15 @@ namespace filesystem
 {
 	std::string getResourcesPath()
 	{
-		return std::filesystem::absolute("../../../resources/").string();
+		if (exists(std::filesystem::path("./resources")))
+			return std::filesystem::absolute("./resources/").string();
+		else if (exists(std::filesystem::path("../resources")))
+			return std::filesystem::absolute("../resources/").string();
+		else if (exists(std::filesystem::path("../../resources")))
+			return std::filesystem::absolute("../../resources/").string();
+		else if (exists(std::filesystem::path("../../../resources")))
+			return std::filesystem::absolute("../../../resources/").string();
+		else
+			throw std::runtime_error("failed to find resources folder");
 	}
 }
