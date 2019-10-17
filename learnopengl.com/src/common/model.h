@@ -8,7 +8,7 @@
 #include <stb_image.h>
 #include <filesystem>
 
-unsigned int TextureFromFile(const char* path, const std::string& directory);
+unsigned int TextureFromFile(const char* path, const std::string& directory, GLenum internalFormat = GL_RGB8, GLenum wrapMode = GL_REPEAT);
 
 class Model
 {
@@ -147,7 +147,7 @@ inline std::vector<Texture> Model::loadMaterialTextures(aiMaterial* material, ai
 	return textures;
 }
 
-unsigned int TextureFromFile(const char* path, const std::string& directory)
+unsigned int TextureFromFile(const char* path, const std::string& directory, GLenum internalFormat, GLenum wrapMode)
 {
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
@@ -167,13 +167,13 @@ unsigned int TextureFromFile(const char* path, const std::string& directory)
 		else if (nrComponents == 4)
 			format = GL_RGBA;
 
-		glTextureStorage2D(textureID, 1, GL_RGB8, width, height);
+		glTextureStorage2D(textureID, 1, internalFormat, width, height);
 		glTextureSubImage2D(textureID, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);
 
 		glGenerateTextureMipmap(textureID);
 
-		glTextureParameteri(textureID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(textureID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTextureParameteri(textureID, GL_TEXTURE_WRAP_S, wrapMode);
+		glTextureParameteri(textureID, GL_TEXTURE_WRAP_T, wrapMode);
 		glTextureParameteri(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTextureParameteri(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
