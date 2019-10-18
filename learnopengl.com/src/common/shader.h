@@ -92,7 +92,7 @@ public:
 	void setFloat(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
-		if(location == -1)
+		if (location == -1)
 		{
 			std::cout << "failed to find float location: " << name << "\n";
 		}
@@ -102,7 +102,7 @@ public:
 	void setInt(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
-		if(location == -1)
+		if (location == -1)
 		{
 			std::cout << "failed to find int location: " << name << "\n";
 		}
@@ -112,17 +112,17 @@ public:
 	void setVec3(const std::string& name, float a, float b, float c)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
-		if(location == -1)
+		if (location == -1)
 		{
 			std::cout << "failed to find vec3 location: " << name << "\n";
 		}
 		glUniform3f(location, a, b, c);
 	}
-	
-	void setVec3(const std::string& name, glm::vec3 &vec3)
+
+	void setVec3(const std::string& name, glm::vec3& vec3)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
-		if(location == -1)
+		if (location == -1)
 		{
 			std::cout << "failed to find uniform location: " << name << "\n";
 		}
@@ -132,11 +132,21 @@ public:
 	void setMat4(const std::string& name, glm::mat4 mat4)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
-		if(location == -1)
+		if (location == -1)
 		{
 			std::cout << "failed to find mat4 location: " << name << "\n";
 		}
-        glUniformMatrix4fv(location, 1, GL_FALSE, &mat4[0][0]);
+		glUniformMatrix4fv(location, 1, GL_FALSE, &mat4[0][0]);
+	}
+
+	void setBool(const std::string& name, bool status)
+	{
+		GLint location = glGetUniformLocation(programID, name.c_str());
+		if (location == -1)
+		{
+			std::cout << "failed to find bool location: " << name << "\n";
+		}
+		glUniform1i(location, status);
 	}
 
 	GLuint programID;

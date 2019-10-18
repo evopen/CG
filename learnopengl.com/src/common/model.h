@@ -166,6 +166,8 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, GLe
 			format = GL_RGB;
 		else if (nrComponents == 4)
 			format = GL_RGBA;
+		else
+			throw std::runtime_error("unknown image channels");
 
 		glTextureStorage2D(textureID, 1, internalFormat, width, height);
 		glTextureSubImage2D(textureID, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);
