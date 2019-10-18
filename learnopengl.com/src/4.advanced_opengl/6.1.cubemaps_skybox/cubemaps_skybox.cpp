@@ -33,7 +33,10 @@ struct PostEffect
 	bool sharpen;
 	bool blur;
 	bool edgeDetect;
+	bool paint;
 } postEffect;
+
+int sampleRadius = 3;
 
 std::vector<std::filesystem::path> faces
 {
@@ -407,6 +410,8 @@ void drawOverlay()
 	ImGui::Checkbox("Sharpen", &postEffect.sharpen);
 	ImGui::Checkbox("Blur", &postEffect.blur);
 	ImGui::Checkbox("Edge Detection", &postEffect.edgeDetect);
+	ImGui::Checkbox("Oil Paint", &postEffect.paint);
+	ImGui::DragInt("Sample Radius", &sampleRadius, 0.1, 1, 18);
 	ImGui::End();
 
 	ImGui::Render();
@@ -576,7 +581,7 @@ int main(int argc, char* argv[])
 		glBindVertexArray(transparentVAO);
 		glBindTextureUnit(0, windowTexture);
 
-		for (auto it = sortedWindows.rbegin(); it != sortedWindows.rend(); it++)
+		for (auto it = sortedWindows.rbegin(); it != sortedWindows.rend(); ++it)
 		{
 			model = glm::translate(glm::mat4(1.f), it->second);
 			shader.setMat4("model", model);
@@ -591,6 +596,8 @@ int main(int argc, char* argv[])
 		screenShader.setBool("postEffect.sharpen", postEffect.sharpen);
 		screenShader.setBool("postEffect.blur", postEffect.blur);
 		screenShader.setBool("postEffect.edgeDetect", postEffect.edgeDetect);
+		screenShader.setBool("postEffect.paint", postEffect.paint);
+		screenShader.setInt("sample_radius", sampleRadius);
 		glDisable(GL_DEPTH_TEST);
 		glBindTextureUnit(0, texColorBuffer);
 		glBindVertexArray(screenVAO);
