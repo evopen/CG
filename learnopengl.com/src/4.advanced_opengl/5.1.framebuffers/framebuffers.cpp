@@ -101,6 +101,18 @@ float transparentVertices[] = {
 	1.0f, 0.5f, 0.0f, 1.0f, 0.0f
 };
 
+float quadVertices[] = {
+	// vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+	// positions   // texCoords
+	-1.0f, 1.0f, 0.0f, 1.0f,
+	-1.0f, -1.0f, 0.0f, 0.0f,
+	1.0f, -1.0f, 1.0f, 0.0f,
+
+	-1.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, -1.0f, 1.0f, 0.0f,
+	1.0f, 1.0f, 1.0f, 1.0f
+};
+
 
 void processInput(GLFWwindow* window)
 {
@@ -233,6 +245,7 @@ int main(int argc, char* argv[])
 	init();
 
 	Shader shader("shader.vert", "shader.frag");
+	Shader screenShader("screen_shader.vert", "screen_shader.frag");
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glEnable(GL_DEPTH_TEST);
@@ -282,7 +295,20 @@ int main(int argc, char* argv[])
 	glVertexArrayAttribBinding(transparentVAO, 0, 0);
 	glVertexArrayAttribBinding(transparentVAO, 1, 0);
 
-	GLuint cubeTexture = TextureFromFile("textures/marble.jpg", filesystem::getResourcesPath());
+	GLuint screenVAO;
+	GLuint screenVBO;
+	glCreateVertexArrays(1, &screenVAO);
+	glCreateBuffers(1, &screenVBO);
+	glNamedBufferData(screenVBO, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+	glVertexArrayVertexBuffer(screenVAO, 0, screenVBO, 0, sizeof(float) * 4);
+	glVertexArrayAttribFormat(screenVAO, 0, 2, GL_FLOAT, GL_FALSE, 0);
+	glVertexArrayAttribFormat(screenVAO, 1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2);
+	glEnableVertexArrayAttrib(screenVAO, 0);
+	glEnableVertexArrayAttrib(screenVAO, 1);
+	glVertexArrayAttribBinding(screenVAO, 0, 0);
+	glVertexArrayAttribBinding(screenVAO, 1, 0);
+
+	GLuint cubeTexture = TextureFromFile("textures/container.jpg", filesystem::getResourcesPath());
 	GLuint floorTexture = TextureFromFile("textures/metal.png", filesystem::getResourcesPath());
 	GLuint grassTexture = TextureFromFile("textures/window.png", filesystem::getResourcesPath(), GL_RGBA8,
 	                                      GL_CLAMP_TO_EDGE);
@@ -297,10 +323,41 @@ int main(int argc, char* argv[])
 	shader.use();
 	shader.setInt("myTexture", 0);
 
+	/// framebuffer
+	GLuint FBO;
+	glCreateFramebuffers(1, &FBO);
+
+	/// create color attachment(texture)
+	GLuint texColorBuffer;
+	glCreateTextures(GL_TEXTURE_2D, 1, &texColorBuffer);
+	glTextureStorage2D(texColorBuffer, 1, GL_RGB8, width, height);
+
+	/// create depth-stencil buffer
+	GLuint rbo;
+	glCreateRenderbuffers(1, &rbo);
+	glNamedRenderbufferStorage(rbo, GL_DEPTH24_STENCIL8, width, height);
+
+
+	glNamedFramebufferTexture(FBO, GL_COLOR_ATTACHMENT0, texColorBuffer, 0);
+	glNamedFramebufferRenderbuffer(FBO, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+	if ((glCheckNamedFramebufferStatus(FBO, GL_FRAMEBUFFER) & GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) ==
+		GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT)
+	{
+		std::cout << "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT" << "\n";
+	}
+	if ((glCheckNamedFramebufferStatus(FBO, GL_FRAMEBUFFER) & GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) ==
+		GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT)
+	{
+		std::cout << "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT " << "\n";
+	}
+	/// 
+
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		glClearColor(0.0, 0.0, 0.0, 1.f);
 		glStencilMask(0xFF);
 		glEnable(GL_DEPTH_TEST);
@@ -359,6 +416,19 @@ int main(int argc, char* argv[])
 			shader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		screenShader.use();
+		screenShader.setInt("screenTexture", 0);
+		glDisable(GL_DEPTH_TEST);
+		glBindTextureUnit(0, texColorBuffer);
+		glBindVertexArray(screenVAO);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glClearColor(1.0, 1.0, 1.0, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
 		glfwSwapBuffers(window);

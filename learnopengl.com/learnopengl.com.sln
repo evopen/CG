@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
@@ -102,6 +102,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.blending_discard", "src\4.advanced_opengl\3.1.blending_discard\3.1.blending_discard.vcxproj", "{A5E39D15-7ABA-4677-94FF-04B6FA91D227}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.2.blending_sort", "src\4.advanced_opengl\3.2.blending_sort\3.2.blending_sort.vcxproj", "{F13DEDB0-112F-42F9-9DAB-2EB965BE3FA9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.framebuffers", "src\4.advanced_opengl\5.1.framebuffers\5.1.framebuffers.vcxproj", "{EF6C24FC-C107-436C-A270-592AB51C82C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -479,6 +481,14 @@ Global
 		{F13DEDB0-112F-42F9-9DAB-2EB965BE3FA9}.Release|x64.Build.0 = Release|x64
 		{F13DEDB0-112F-42F9-9DAB-2EB965BE3FA9}.Release|x86.ActiveCfg = Release|Win32
 		{F13DEDB0-112F-42F9-9DAB-2EB965BE3FA9}.Release|x86.Build.0 = Release|Win32
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Debug|x64.ActiveCfg = Debug|x64
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Debug|x64.Build.0 = Debug|x64
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Debug|x86.ActiveCfg = Debug|Win32
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Debug|x86.Build.0 = Debug|Win32
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Release|x64.ActiveCfg = Release|x64
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Release|x64.Build.0 = Release|x64
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Release|x86.ActiveCfg = Release|Win32
+		{EF6C24FC-C107-436C-A270-592AB51C82C1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -529,6 +539,7 @@ Global
 		{A30B309A-7A6A-48E6-8006-C8431B1BE04F} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{A5E39D15-7ABA-4677-94FF-04B6FA91D227} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{F13DEDB0-112F-42F9-9DAB-2EB965BE3FA9} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
+		{EF6C24FC-C107-436C-A270-592AB51C82C1} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {580C9846-68DD-4ED7-BF75-753F9B796851}
