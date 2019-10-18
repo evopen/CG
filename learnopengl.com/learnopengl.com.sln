@@ -9,11 +9,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.hello_triangle", "src\1
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.2.hello_triangle_indexed", "src\1.getting_started\2.2.hello_triangle_indexed\2.2.hello_triangle_indexed.vcxproj", "{7575C966-9163-47B2-84BE-A5C874088986}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.3.hello_triangle_execise1", "src\1.getting_started\2.3.hello_triangle_execise1\2.3.hello_triangle_execise1.vcxproj", "{87F1F257-AE4F-49B3-AFCB-E3A8293B26B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.3.hello_triangle_exercise1", "src\1.getting_started\2.3.hello_triangle_exercise1\2.3.hello_triangle_exercise1.vcxproj", "{87F1F257-AE4F-49B3-AFCB-E3A8293B26B1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.4.hello_triangle_execise2", "src\1.getting_started\2.4.hello_triangle_execise2\2.4.hello_triangle_execise2.vcxproj", "{3F935D14-CD2D-402A-8B96-8E9FDC3612CC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.4.hello_triangle_exercise2", "src\1.getting_started\2.4.hello_triangle_exercise2\2.4.hello_triangle_exercise2.vcxproj", "{3F935D14-CD2D-402A-8B96-8E9FDC3612CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.5.hello_triangle_execise3", "src\1.getting_started\2.5.hello_triangle_execise3\2.5.hello_triangle_execise3.vcxproj", "{5F6130F2-E812-4B42-A3A7-3ABD24A35ABC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.5.hello_triangle_exercise3", "src\1.getting_started\2.5.hello_triangle_exercise3\2.5.hello_triangle_exercise3.vcxproj", "{5F6130F2-E812-4B42-A3A7-3ABD24A35ABC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.1.shaders_uniform", "src\1.getting_started\3.1.shaders_uniform\3.1.shaders_uniform.vcxproj", "{88B38BDE-04DF-483B-8B2D-499417DC1FB8}"
 EndProject
@@ -21,27 +21,27 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.2.shaders_interpolation",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.3.shaders_class", "src\1.getting_started\3.3.shaders_class\3.3.shaders_class.vcxproj", "{C6B29A21-3C71-4A31-829F-2BA29F9B40ED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4.shaders_execise1", "src\1.getting_started\3.4.shaders_execise1\3.4.shaders_execise1.vcxproj", "{9EDA2047-4776-4AE6-8895-621B5C5BB5DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4.shaders_exercise1", "src\1.getting_started\3.4.shaders_exercise1\3.4.shaders_exercise1.vcxproj", "{9EDA2047-4776-4AE6-8895-621B5C5BB5DB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.5.shaders_execise2", "src\1.getting_started\3.5.shaders_execise2\3.5.shaders_execise2.vcxproj", "{232BA6AE-EE49-403E-9C6A-A276CF4DEDF7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.5.shaders_exercise2", "src\1.getting_started\3.5.shaders_exercise2\3.5.shaders_exercise2.vcxproj", "{232BA6AE-EE49-403E-9C6A-A276CF4DEDF7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6.shaders_execise3", "src\1.getting_started\3.6.shaders_execise3\3.6.shaders_execise3.vcxproj", "{53AAD090-6286-4532-9660-E19BFA304728}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6.shaders_exercise3", "src\1.getting_started\3.6.shaders_exercise3\3.6.shaders_exercise3.vcxproj", "{53AAD090-6286-4532-9660-E19BFA304728}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.textures", "src\1.getting_started\4.1.textures\4.1.textures.vcxproj", "{5178AAE9-ADFE-4876-A459-ED2B803C7E93}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.textures_combined", "src\1.getting_started\4.2.textures_combined\4.2.textures_combined.vcxproj", "{D5FF5EFC-4999-4AAE-8F8D-FA7CC87ABE97}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.textures_execise1", "src\1.getting_started\4.3.textures_execise1\4.3.textures_execise1.vcxproj", "{F6F63BFA-765E-47CD-B8E4-7FD4A0E9CB0C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.textures_exercise1", "src\1.getting_started\4.3.textures_exercise1\4.3.textures_exercise1.vcxproj", "{F6F63BFA-765E-47CD-B8E4-7FD4A0E9CB0C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.textures_execise2", "src\1.getting_started\4.4.textures_execise2\4.4.textures_execise2.vcxproj", "{12056CC4-8E9D-45B0-9FC5-BC7384212168}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.textures_exercise2", "src\1.getting_started\4.4.textures_exercise2\4.4.textures_exercise2.vcxproj", "{12056CC4-8E9D-45B0-9FC5-BC7384212168}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.5.textures_execise3", "src\1.getting_started\4.5.textures_execise3\4.5.textures_execise3.vcxproj", "{B0638D6A-2AB2-4B1E-BA2F-C23A2D90969C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.5.textures_exercise3", "src\1.getting_started\4.5.textures_exercise3\4.5.textures_exercise3.vcxproj", "{B0638D6A-2AB2-4B1E-BA2F-C23A2D90969C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.6.textures_execise4", "src\1.getting_started\4.6.textures_execise4\4.6.textures_execise4.vcxproj", "{DBBE42EC-5C49-481B-9346-A8ECA8D78FA3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.6.textures_exercise4", "src\1.getting_started\4.6.textures_exercise4\4.6.textures_exercise4.vcxproj", "{DBBE42EC-5C49-481B-9346-A8ECA8D78FA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.transformations", "src\1.getting_started\5.1.transformations\5.1.transformations.vcxproj", "{25AC995B-8C38-4D17-BE6D-90917E338B6E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.transformations_execise2", "src\1.getting_started\5.2.transformations_execise2\5.2.transformations_execise2.vcxproj", "{D7888AAC-1069-4510-A778-2D0928EBE7A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2.transformations_exercise2", "src\1.getting_started\5.2.transformations_exercise2\5.2.transformations_exercise2.vcxproj", "{D7888AAC-1069-4510-A778-2D0928EBE7A6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1.coordinate_systems", "src\1.getting_started\6.1.coordinate_systems\6.1.coordinate_systems.vcxproj", "{40D68F6C-24C3-44C9-BAF9-82F0524BEF41}"
 EndProject
@@ -71,9 +71,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.1.light_maps_diffuse_map"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.light_maps_specular_map", "src\2.lighting\4.2.light_maps_specular_map\4.2.light_maps_specular_map.vcxproj", "{E3FA58E5-D910-41DC-866E-F65A79FEB78D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.light_maps_execise3", "src\2.lighting\4.3.light_maps_execise3\4.3.light_maps_execise3.vcxproj", "{924285CA-7847-4453-9C3D-2A13AF7B5256}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.3.light_maps_exercise3", "src\2.lighting\4.3.light_maps_exercise3\4.3.light_maps_exercise3.vcxproj", "{924285CA-7847-4453-9C3D-2A13AF7B5256}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.light_maps_execise4", "src\2.lighting\4.4.light_maps_execise4\4.4.light_maps_execise4.vcxproj", "{8CA10548-45F0-4103-B92A-9B5D9FDA6DB5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.4.light_maps_exercise4", "src\2.lighting\4.4.light_maps_exercise4\4.4.light_maps_exercise4.vcxproj", "{8CA10548-45F0-4103-B92A-9B5D9FDA6DB5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.1.light_casters_directional", "src\2.lighting\5.1.light_casters_directional\5.1.light_casters_directional.vcxproj", "{67EFA3DC-A954-40F7-948F-FDF52B86534A}"
 EndProject
@@ -85,7 +85,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.4.light_casters_spot_soft
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1.multiple_lights", "src\2.lighting\6.1.multiple_lights\6.1.multiple_lights.vcxproj", "{AAFB82A1-27FF-46BA-BF6B-C37C25013F5A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.multiple_lights_execise1", "src\2.lighting\6.2.multiple_lights_execise1\6.2.multiple_lights_execise1.vcxproj", "{0F446183-C94B-466F-8B90-F6CADE9EEEF1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2.multiple_lights_exercise1", "src\2.lighting\6.2.multiple_lights_exercise1\6.2.multiple_lights_exercise1.vcxproj", "{0F446183-C94B-466F-8B90-F6CADE9EEEF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.lighting", "2.lighting", "{3E339648-8C19-4403-9762-7CD325E87A13}"
 EndProject
