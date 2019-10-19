@@ -12,6 +12,7 @@
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
+#include <windows.h>
 
 
 GLFWwindow* window;
@@ -47,6 +48,10 @@ std::vector<std::filesystem::path> faces
 	"front.jpg",
 	"back.jpg"
 };
+
+extern "C" {
+_declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+}
 
 
 glm::vec3 cubePositions[] = {

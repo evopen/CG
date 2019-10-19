@@ -26,12 +26,19 @@ vec3 sharpen(vec3 color);
 vec3 blur(vec3 color);
 vec3 edgeDetect(vec3 color);
 vec3 paint(vec3 color);
+void getLocalGradient();
+
+float gradient;
+mat2 RotationMatrix;
+
+vec3 colorTest(vec3 color);
 
 void main()
 {
 	takeSamplesForKernel();
+	getLocalGradient();
 	FragColor = texture(screenTexture, TexCoords);
-
+	//FragColor = vec4(colorTest(FragColor.rgb), 1);
 	if(postEffect.paint) {
 		FragColor = vec4(paint(FragColor.rgb), 1.0);
 	}
@@ -55,10 +62,29 @@ void main()
 	}
 }
 
+vec3 colorTest(vec3 color) {
+	vec3 result;
+	ivec2 sizes = textureSize(screenTexture, 0);
+	float x_offset = (1.f / 300.f) * sample_radius;
+	float y_offset = (1.f / 300.f) * sample_radius;
+	vec2 what = vec2(x_offset, y_offset) * RotationMatrix;
+	x_offset = what.x;
+	y_offset = what.y;
+	if(abs(x_offset - y_offset) < 0.00001) {
+		result = vec3(1,0,0);
+	}
+	else {
+		result = vec3(0,1,0);
+	}
+	return result;
+}
+
 void takeSamplesForKernel() {
 	ivec2 sizes = textureSize(screenTexture, 0);
-	float x_offset = 1.0 / sizes[0] * sample_radius;  
-	float y_offset = 1.0 / sizes[1] * sample_radius;  
+	float x_offset = 1.0 / sizes[0] * sample_radius;
+	float y_offset = 1.0 / sizes[1] * sample_radius;
+	vec2 what = vec2(x_offset, y_offset) * RotationMatrix;
+
 	vec2 offsets[9] = vec2[](
         vec2(-x_offset,  y_offset), // top-left
         vec2( 0.0f,    y_offset), // top-center
@@ -174,4 +200,20 @@ vec3 paint(vec3 color) {
 	}
 
 	return mean[minVarIndex];
+}
+
+void getLocalGradient() {
+	float GradientX = 0;
+	float GradientY = 0;
+	float SobelX[9] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+	float SobelY[9] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+	int i = 0;
+
+	vec3 result = vec3(0);
+	for(int i = 0; i < 9; i++) {
+		GradientX += dot(samples[i], vec3(0.3,0.59,0.11)) * SobelX[i];
+		GradientY += dot(samples[i], vec3(0.3,0.59,0.11)) * SobelY[i];
+	}
+	gradient = atan(GradientY / GradientX);
+	RotationMatrix = mat2(cos(gradient), -sin(gradient), sin(gradient), cos(gradient));
 }
