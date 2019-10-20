@@ -44,7 +44,7 @@ void main()
 		R = refract(viewDir_norm, normal_norm, ratio);
 		result = texture(skybox, R).rgb;
 	} else if(textureMode == 0) {
-		result = CalcDirLight(dirLight, normal_norm, viewDir_norm);
+		result = CalcDirLight(dirLight, normal_norm, -viewDir_norm);
 	}
 	FragColor = vec4(result, 1.0);
 }

@@ -26,7 +26,7 @@ uint32_t width = 1024;
 uint32_t height = 768;
 
 Camera camera;
-static glm::vec3 lightDir = glm::vec3(0, 0, -1);
+static glm::vec3 lightDir = glm::vec3(0.1, 0.1, -1);
 
 
 GLuint FBO, texColorBuffer, rbo;
@@ -447,8 +447,7 @@ void drawOverlay()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-
-int main(int argc, char* argv[])
+void run()
 {
 	init();
 
@@ -627,6 +626,19 @@ int main(int argc, char* argv[])
 	}
 
 	glfwTerminate();
+}
+
+
+int main(int argc, char* argv[])
+{
+	try
+	{
+		run();
+	}
+	catch (const std::runtime_error& e)
+	{
+		std::cout << e.what() << "\n";
+	}
 
 	return 0;
 }
