@@ -114,6 +114,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.1.advanced_glsl_point_siz
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.2.advanced_glsl_ubo", "src\4.advanced_opengl\8.2.advanced_glsl_ubo\8.2.advanced_glsl_ubo.vcxproj", "{EE59ED13-3FE3-49F5-9F2F-F197ADDE5494}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.1.geometry_shader_houses", "src\4.advanced_opengl\9.1.geometry_shader_houses\9.1.geometry_shader_houses.vcxproj", "{639CD633-D943-4688-9C11-3865DDD78694}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.2.geometry_shader_exploding", "src\4.advanced_opengl\9.2.geometry_shader_exploding\9.2.geometry_shader_exploding.vcxproj", "{94602DDC-689A-42A4-A5B1-F71E6068F3D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -538,6 +542,22 @@ Global
 		{EE59ED13-3FE3-49F5-9F2F-F197ADDE5494}.Release|x64.Build.0 = Release|x64
 		{EE59ED13-3FE3-49F5-9F2F-F197ADDE5494}.Release|x86.ActiveCfg = Release|Win32
 		{EE59ED13-3FE3-49F5-9F2F-F197ADDE5494}.Release|x86.Build.0 = Release|Win32
+		{639CD633-D943-4688-9C11-3865DDD78694}.Debug|x64.ActiveCfg = Debug|x64
+		{639CD633-D943-4688-9C11-3865DDD78694}.Debug|x64.Build.0 = Debug|x64
+		{639CD633-D943-4688-9C11-3865DDD78694}.Debug|x86.ActiveCfg = Debug|Win32
+		{639CD633-D943-4688-9C11-3865DDD78694}.Debug|x86.Build.0 = Debug|Win32
+		{639CD633-D943-4688-9C11-3865DDD78694}.Release|x64.ActiveCfg = Release|x64
+		{639CD633-D943-4688-9C11-3865DDD78694}.Release|x64.Build.0 = Release|x64
+		{639CD633-D943-4688-9C11-3865DDD78694}.Release|x86.ActiveCfg = Release|Win32
+		{639CD633-D943-4688-9C11-3865DDD78694}.Release|x86.Build.0 = Release|Win32
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Debug|x64.ActiveCfg = Debug|x64
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Debug|x64.Build.0 = Debug|x64
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Debug|x86.ActiveCfg = Debug|Win32
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Debug|x86.Build.0 = Debug|Win32
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Release|x64.ActiveCfg = Release|x64
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Release|x64.Build.0 = Release|x64
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Release|x86.ActiveCfg = Release|Win32
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -594,6 +614,8 @@ Global
 		{B440FA06-914A-46DE-B702-AFFF445CCDBC} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{2C3988CA-D64E-45AC-87C4-3AA9A261EE3D} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{EE59ED13-3FE3-49F5-9F2F-F197ADDE5494} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
+		{639CD633-D943-4688-9C11-3865DDD78694} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
+		{94602DDC-689A-42A4-A5B1-F71E6068F3D3} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {580C9846-68DD-4ED7-BF75-753F9B796851}
