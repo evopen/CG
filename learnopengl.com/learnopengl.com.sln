@@ -122,6 +122,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.3.geometry_shader_normals
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10.1.instancing_quads", "src\4.advanced_opengl\10.1.instancing_quads\10.1.instancing_quads.vcxproj", "{C9DD7B63-9242-444A-9294-ADD52C72D76E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10.2.asteroids", "src\4.advanced_opengl\10.2.asteroids\10.2.asteroids.vcxproj", "{787899A7-454D-41D2-A1A4-59D8FA0E16DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -578,6 +580,14 @@ Global
 		{C9DD7B63-9242-444A-9294-ADD52C72D76E}.Release|x64.Build.0 = Release|x64
 		{C9DD7B63-9242-444A-9294-ADD52C72D76E}.Release|x86.ActiveCfg = Release|Win32
 		{C9DD7B63-9242-444A-9294-ADD52C72D76E}.Release|x86.Build.0 = Release|Win32
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Debug|x64.ActiveCfg = Debug|x64
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Debug|x64.Build.0 = Debug|x64
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Debug|x86.Build.0 = Debug|Win32
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Release|x64.ActiveCfg = Release|x64
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Release|x64.Build.0 = Release|x64
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Release|x86.ActiveCfg = Release|Win32
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -638,6 +648,7 @@ Global
 		{94602DDC-689A-42A4-A5B1-F71E6068F3D3} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{78E207A2-ED82-4589-8F1C-0EA664784102} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 		{C9DD7B63-9242-444A-9294-ADD52C72D76E} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
+		{787899A7-454D-41D2-A1A4-59D8FA0E16DD} = {C6C35F83-D909-44D5-ADF8-1133F169C704}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {580C9846-68DD-4ED7-BF75-753F9B796851}

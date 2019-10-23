@@ -318,19 +318,6 @@ void run()
 
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-	GLuint quadVAO, quadVBO;
-	glCreateVertexArrays(1, &quadVAO);
-	glCreateBuffers(1, &quadVBO);
-	glNamedBufferData(quadVBO, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
-	glVertexArrayVertexBuffer(quadVAO, 0, quadVBO, 0, sizeof(float) * 5);
-	glVertexArrayAttribFormat(quadVAO, 0, 2, GL_FLOAT, GL_FALSE, 0);
-	glVertexArrayAttribFormat(quadVAO, 1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 2);
-	glEnableVertexArrayAttrib(quadVAO, 0);
-	glEnableVertexArrayAttrib(quadVAO, 1);
-	glVertexArrayAttribBinding(quadVAO, 0, 0);
-	glVertexArrayAttribBinding(quadVAO, 1, 0);
-
-
 	glm::vec2 translations[100];
 	int index = 0;
 	float offset = 0.1f;
@@ -345,10 +332,30 @@ void run()
 		}
 	}
 
-	GLuint uboBuffer;
-	glCreateBuffers(1, &uboBuffer);
-	glNamedBufferData(uboBuffer, sizeof(glm::vec2) * 100, translations, GL_STATIC_DRAW);
-	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboBuffer);
+	GLuint quadVAO;
+	glCreateVertexArrays(1, &quadVAO);
+
+	GLuint quadVBO;
+	glCreateBuffers(1, &quadVBO);
+	glNamedBufferData(quadVBO, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+
+	GLuint instanceVBO;
+	glCreateBuffers(1, &instanceVBO);
+	glNamedBufferData(instanceVBO, sizeof(glm::vec2) * 100, translations, GL_STATIC_DRAW);
+
+	glVertexArrayVertexBuffer(quadVAO, 0, quadVBO, 0, sizeof(float) * 5);
+	glVertexArrayVertexBuffer(quadVAO, 1, instanceVBO, 0, sizeof(float) * 2);
+	
+	glVertexArrayAttribFormat(quadVAO, 0, 2, GL_FLOAT, GL_FALSE, 0);
+	glVertexArrayAttribFormat(quadVAO, 1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 2);
+	glVertexArrayAttribFormat(quadVAO, 2, 2, GL_FLOAT, GL_FALSE, 0);
+	glEnableVertexArrayAttrib(quadVAO, 0);
+	glEnableVertexArrayAttrib(quadVAO, 1);
+	glEnableVertexArrayAttrib(quadVAO, 2);
+	glVertexArrayAttribBinding(quadVAO, 0, 0);
+	glVertexArrayAttribBinding(quadVAO, 1, 0);
+	glVertexArrayAttribBinding(quadVAO, 2, 1);
+	glVertexArrayBindingDivisor(quadVAO, 1, 1);
 
 	while (!glfwWindowShouldClose(window))
 	{
