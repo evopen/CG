@@ -24,6 +24,8 @@ public:
 	std::vector<uint32_t> indices;
 	std::vector<Texture> textures;
 
+	uint32_t VAO;
+
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned>& indices,
 	     const std::vector<Texture>& textures)
 		: vertices(vertices),
@@ -35,7 +37,7 @@ public:
 
 	void Draw(Shader shader);
 private:
-	uint32_t VAO, VBO, EBO;
+	uint32_t VBO, EBO;
 
 	void setupMesh();
 };

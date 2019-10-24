@@ -8,7 +8,8 @@
 #include <stb_image.h>
 #include <filesystem>
 
-unsigned int TextureFromFile(const char* path, const std::string& directory, GLenum internalFormat = GL_RGB8, GLenum wrapMode = GL_REPEAT);
+unsigned int TextureFromFile(const char* path, const std::string& directory, GLenum internalFormat = GL_RGB8,
+                             GLenum wrapMode = GL_REPEAT);
 
 class Model
 {
@@ -18,11 +19,12 @@ public:
 		loadModel(path);
 	}
 
+	std::vector<Mesh> meshes;
+	std::vector<Texture> textures_loaded;
+	
 	void Draw(Shader shader);
 private:
-	std::vector<Mesh> meshes;
 	std::string directory;
-	std::vector<Texture> textures_loaded;
 	void loadModel(std::string path);
 	void processNode(aiNode* node, const aiScene* scene);
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
