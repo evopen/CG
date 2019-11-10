@@ -70,6 +70,16 @@ public:
 		glUniform1f(location, value);
 	}
 
+	void setDouble(const std::string& name, double value)
+	{
+		GLint location = glGetUniformLocation(programID, name.c_str());
+		if (location == -1)
+		{
+			std::cout << "failed to find double location: " << name << "\n";
+		}
+		glUniform1d(location, value);
+	}
+
 	void setInt(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
@@ -90,7 +100,7 @@ public:
 		glUniform3f(location, a, b, c);
 	}
 
-	void setVec3(const std::string& name, glm::vec3& vec3)
+	void setVec3(const std::string& name, const glm::vec3& vec3)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
 		if (location == -1)
@@ -100,7 +110,7 @@ public:
 		glUniform3fv(location, 1, &vec3[0]);
 	}
 
-	void setMat4(const std::string& name, glm::mat4 mat4)
+	void setMat4(const std::string& name, const glm::mat4& mat4)
 	{
 		GLint location = glGetUniformLocation(programID, name.c_str());
 		if (location == -1)

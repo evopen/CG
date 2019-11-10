@@ -15,14 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlackHole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\imgui_impl_glfw.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\common\imgui_impl_opengl3.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="black_hole.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +41,19 @@
     <ClInclude Include="..\common\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BlackHole.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CelestialBody.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="skybox_shader.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="skybox_shader.frag">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

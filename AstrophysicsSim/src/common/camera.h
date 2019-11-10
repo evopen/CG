@@ -33,11 +33,11 @@ public:
 
 
 	// Camera Attributes
-	glm::vec3 Position;
-	glm::vec3 Front;
-	glm::vec3 Up;
-	glm::vec3 Right;
-	glm::vec3 WorldUp;
+	glm::dvec3 Position;
+	glm::dvec3 Front;
+	glm::dvec3 Up;
+	glm::dvec3 Right;
+	glm::dvec3 WorldUp;
 	// Euler Angles
 	float Yaw;
 	float Pitch;
@@ -47,7 +47,7 @@ public:
 	float Zoom;
 
 	// Constructor with vectors
-	Camera(glm::vec3 position = glm::vec3(0.0f, 1.0f, 10.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
+	Camera(glm::vec3 position = glm::vec3(0.0f, 1.0f, 10.f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
 	       float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
 	                                               MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 	{
@@ -78,7 +78,7 @@ public:
 	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 	void ProcessKeyboard(Camera_Movement direction, float deltaTime)
 	{
-		float velocity = MovementSpeed * deltaTime;
+		double velocity = MovementSpeed * deltaTime;
 		if (direction == FORWARD)
 			Position += Front * velocity;
 		if (direction == BACKWARD)
@@ -87,9 +87,9 @@ public:
 			Position -= Right * velocity;
 		if (direction == RIGHT)
 			Position += Right * velocity;
-		if(direction == UP)
+		if (direction == UP)
 			Position += WorldUp * velocity;
-		if(direction == DOWN)
+		if (direction == DOWN)
 			Position -= WorldUp * velocity;
 	}
 

@@ -38,8 +38,8 @@ public:
 			double f = (G * mass * body->mass) / (r * r);
 			double cosPhi = glm::dot(direction, glm::dvec3(1, 0, 0)) / r;
 			double cosTheta = glm::dot(direction, glm::dvec3(0, 0, 1)) / r;
-			double sinTheta = 1 - (cosTheta * cosTheta);
-			double sinPhi = 1 - (cosPhi * cosPhi);
+			double sinTheta = sqrt(1 - (cosTheta * cosTheta));
+			double sinPhi = sqrt(1 - (cosPhi * cosPhi));
 			double x = f * sinTheta * cosPhi;
 			double y = f * sinTheta * sinPhi;
 			double z = f * cosTheta;
