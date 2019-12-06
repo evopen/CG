@@ -1,0 +1,3 @@
+project(asteroids_instanced)
+
+add_executable(asteroids_instanced asteroids_instanced.cpp)
