@@ -64,7 +64,7 @@ public:
 	VkImage depthImage;
 	VmaAllocation depthImageAllocation;
 	VkImageView depthImageView;
-	VkSampleCountFlagBits sampleCount = VK_SAMPLE_COUNT_8_BIT;
+	VkSampleCountFlagBits sampleCount = VK_SAMPLE_COUNT_1_BIT;
 	VkFormat depthImageFormat = VK_FORMAT_D32_SFLOAT;
 	std::vector<VkFramebuffer> swapchainFramebuffers;
 	VkCommandPool commandPool;
@@ -108,23 +108,18 @@ private:
 	void createSwapchain();
 	void createSwapchainImageViews();
 	void createRenderPass();
-	void createColorResources();
 	void createDepthResources();
 	void createFramebuffers();
 	void createCommandPool();
 	void createSyncObjects();
-	void createDescriptorSetLayout();
 	void createDescriptorPool();
+	VkPresentModeKHR choosePresentMode();
 
 public:
 	void drawFrame();
 	void createUniformBuffer(VkDeviceSize bufferSize);
 
-	virtual void createGraphicsPipeline() = 0;
-	virtual void createCommandBuffers() = 0;
-	virtual void updateUniformBuffer(uint32_t currentImage) = 0;
-
-private:
+protected:
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 		VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -135,11 +130,10 @@ private:
 	VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlagBits aspectFlags, uint32_t mipLevels);
 	VkSurfaceFormatKHR chooseSurfaceFormat();
 	void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VmaMemoryUsage memoryUsage,
-		VkBuffer& buffer, VmaAllocation& allocation);
+	                  VkBuffer& buffer, VmaAllocation& allocation);
 	void createImage(uint32_t width, uint32_t height, uint32_t mipLevelCount, VkSampleCountFlagBits sampleCount,
-		VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VmaMemoryUsage memoryUsage,
-		VkImage& image, VmaAllocation& allocation);
-	static std::vector<char> readFile(const std::string& filename);
+	                 VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VmaMemoryUsage memoryUsage,
+	                 VkImage& image, VmaAllocation& allocation);
 
 public:
 	VkShaderModule createShaderModule(const std::string& filename);
