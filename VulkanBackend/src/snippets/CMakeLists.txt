@@ -1,0 +1,1 @@
+add_executable (snippets_test snippets_test.cpp)
