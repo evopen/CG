@@ -46,10 +46,19 @@ namespace dhh::shader
 			VK_FORMAT_R32G32B32_SFLOAT,
 			VK_FORMAT_R32G32B32A32_SFLOAT
 		};
+
+		VkFormat double_types[] = {
+			VK_FORMAT_R64_SFLOAT,
+			VK_FORMAT_R64G64_SFLOAT,
+			VK_FORMAT_R64G64B64_SFLOAT,
+			VK_FORMAT_R64G64B64A64_SFLOAT,
+		};
 		switch (type.basetype)
 		{
 		case spirv_cross::SPIRType::Float:
 			return float_types[type.vecsize - 1];
+		case spirv_cross::SPIRType::Double:
+			return double_types[type.vecsize - 1];
 		default:
 			throw std::exception("Cannot find VK_Format");
 		}
@@ -203,6 +212,14 @@ namespace dhh::shader
 			{
 				DescriptorInfo info = reflect_descriptor(compiler, resource);
 				info.vkDescriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+				descriptorInfos.insert({info.binding, info});
+			}
+
+			// storage buffer descriptor info
+			for (const spirv_cross::Resource& resource : shaderResources.storage_buffers)
+			{
+				DescriptorInfo info = reflect_descriptor(compiler, resource);
+				info.vkDescriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 				descriptorInfos.insert({info.binding, info});
 			}
 		}

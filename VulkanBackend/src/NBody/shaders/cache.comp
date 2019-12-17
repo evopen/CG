@@ -1,0 +1,27 @@
+#version 450
+
+#define BODIES_COUNT 7
+
+layout (local_size_x = 32, local_size_y = 1, local_size_z = 1) in;
+
+struct Body {
+	dvec3 position;
+	dvec3 last_position;
+	dvec3 velocity;
+	double mass;
+};
+
+layout (set = 0, binding = 0) buffer buf_block {
+	Body bodies[BODIES_COUNT];
+};
+
+
+void main() {
+	// index for itself
+	uint index = gl_GlobalInvocationID.x;
+
+	if(index > 6)
+		return;
+	
+	bodies[index].last_position = bodies[index].position;
+}

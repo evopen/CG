@@ -3,6 +3,8 @@
 #include <snippets.h>
 #include <Filesystem.hpp>
 #include <Shader.hpp>
+#include <Input.hpp>
+
 
 #define VMA_IMPLEMENTATION
 #include "vk_mem_alloc.h"
@@ -11,6 +13,7 @@
 #include <set>
 #include <array>
 #include <algorithm>
+#include "VulkanInitializer.hpp"
 
 void VulkanBase::init()
 {
@@ -25,6 +28,12 @@ void VulkanBase::initWindow()
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	window = glfwCreateWindow(windowWidth, windowHeight, windowTitle.c_str(), nullptr, nullptr);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPos(window, windowWidth / 2, windowHeight / 2);
+	dhh::input::camera = &camera;
+	glfwSetCursorPosCallback(window, dhh::input::cursorPosCallback);
+	glfwSetScrollCallback(window, dhh::input::scrollCallback);
+	glfwSetWindowPos(window, 500, 200);
 }
 
 void VulkanBase::initVulkan()
@@ -46,6 +55,7 @@ void VulkanBase::initVulkan()
 	createCommandPool();
 	createSyncObjects();
 	createDescriptorPool();
+	allocateCommandbuffers();
 }
 
 void VulkanBase::createInstance()
@@ -127,10 +137,10 @@ void VulkanBase::pickPhysicalDevice()
 		deviceName = properties.deviceName;
 		if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
 		{
-			return;
+			break;
 		}
 	}
-	std::cout << " GPU Picked: " << deviceName << "\n";
+	std::cout << "GPU Picked: " << deviceName << "\n";
 }
 
 void VulkanBase::createLogicalDevice()
@@ -156,7 +166,9 @@ void VulkanBase::createLogicalDevice()
 		queueCreateInfos.push_back(queueCreateInfo);
 	}
 
-
+	VkPhysicalDeviceFeatures features = {};
+	features.shaderFloat64 = VK_TRUE;
+	features.fillModeNonSolid = VK_TRUE;
 	VkDeviceCreateInfo deviceCreateInfo;
 	deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	deviceCreateInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
@@ -166,7 +178,7 @@ void VulkanBase::createLogicalDevice()
 	deviceCreateInfo.flags = VK_NULL_HANDLE;
 	deviceCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
 	deviceCreateInfo.pQueueCreateInfos = queueCreateInfos.data();
-	deviceCreateInfo.pEnabledFeatures = nullptr;
+	deviceCreateInfo.pEnabledFeatures = &features;
 	deviceCreateInfo.pNext = nullptr;
 
 	vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &device);
@@ -207,7 +219,7 @@ void VulkanBase::createSwapchain()
 	swapchainCreateInfo.preTransform = surfaceCapabilities.currentTransform;
 	swapchainCreateInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 	swapchainCreateInfo.presentMode = choosePresentMode();
-		swapchainCreateInfo.clipped = VK_TRUE;
+	swapchainCreateInfo.clipped = VK_TRUE;
 	swapchainCreateInfo.oldSwapchain = nullptr;
 
 	vkCreateSwapchainKHR(device, &swapchainCreateInfo, nullptr, &swapchain);
@@ -237,7 +249,7 @@ void VulkanBase::createRenderPass()
 	colorAttachment.flags = VK_NULL_HANDLE;
 	colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
 	colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-	colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE; // DON'T_CARE?
+	colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
 	colorAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 	colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 
@@ -299,7 +311,7 @@ void VulkanBase::createDepthResources()
 
 void VulkanBase::createFramebuffers()
 {
-	swapchainFramebuffers.resize(swapchainImageViews.size());
+	framebuffers.resize(swapchainImageViews.size());
 
 	for (size_t i = 0; i < swapchainImageViews.size(); i++)
 	{
@@ -317,7 +329,7 @@ void VulkanBase::createFramebuffers()
 		framebufferInfo.height = windowHeight;
 		framebufferInfo.layers = 1;
 
-		if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapchainFramebuffers[i]) != VK_SUCCESS)
+		if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &framebuffers[i]) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create framebuffer!");
 		}
@@ -363,19 +375,29 @@ void VulkanBase::createSyncObjects()
 
 void VulkanBase::createDescriptorPool()
 {
-	VkDescriptorPoolSize uboPoolSize;
-	uboPoolSize.descriptorCount = 1;
-	uboPoolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	std::vector<VkDescriptorPoolSize> poolSizes = {
+		{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1},
+		{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1},
+	};
 
 	VkDescriptorPoolCreateInfo poolCreateInfo;
 	poolCreateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
 	poolCreateInfo.pNext = nullptr;
 	poolCreateInfo.flags = VK_NULL_HANDLE;
 	poolCreateInfo.maxSets = static_cast<uint32_t>(swapchainImages.size());
-	poolCreateInfo.poolSizeCount = 1;
-	poolCreateInfo.pPoolSizes = &uboPoolSize;
+	poolCreateInfo.poolSizeCount = poolSizes.size();
+	poolCreateInfo.pPoolSizes = poolSizes.data();
 
 	vkCreateDescriptorPool(device, &poolCreateInfo, nullptr, &descriptorPool);
+}
+
+void VulkanBase::allocateCommandbuffers()
+{
+	commandBuffers.resize(3);
+
+	VkCommandBufferAllocateInfo info = dhh::vk::initializer::commandBufferAllocateInfo(
+		commandPool, 3, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+	vkAllocateCommandBuffers(device, &info, commandBuffers.data());
 }
 
 VkPresentModeKHR VulkanBase::choosePresentMode()

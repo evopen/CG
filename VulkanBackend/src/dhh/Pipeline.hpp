@@ -1,7 +1,9 @@
 #pragma once
 
 #include <Shader.hpp>
+#include <VulkanTools.hpp>
 #include <vector>
+
 
 namespace dhh::shader
 {
@@ -10,8 +12,21 @@ namespace dhh::shader
 	public:
 		std::vector<Shader*> shaders;
 
+		explicit Pipeline(VkDevice device, Shader* shader, VkDescriptorPool pool):
+			device(device), shaders({shader}), descriptorPool(pool)
+		{
+			isComputePipeline = true;
+			createShaderModules();
+			createShaderStageCreateInfos();
+			gatherDescriptorInfo();
+			createDescriptorSetLayouts();
+			createPipelineLayout();
+			createComputePipeline();
+			allocateDescriptorSets();
+		}
 
-		explicit Pipeline(VkDevice device, const std::vector<Shader*>& shaders, uint32_t swapchainCount,
+
+		explicit Pipeline(VkDevice device, const std::vector<Shader*>& shaders,
 		                  VkDescriptorPool pool, VkRenderPass renderPass,
 		                  VkPipelineMultisampleStateCreateInfo multisampleState,
 		                  std::vector<VkDynamicState> dynamicStates,
@@ -20,7 +35,7 @@ namespace dhh::shader
 		                  VkPipelineViewportStateCreateInfo viewportState,
 		                  VkPipelineColorBlendAttachmentState colorBlendAttachmentState,
 		                  VkPipelineInputAssemblyStateCreateInfo inputAssemblyState) :
-			device(device), shaders(shaders), descriptorPool(pool), swapchainCount(swapchainCount),
+			device(device), shaders(shaders), descriptorPool(pool),
 			renderPass(renderPass), multisampleState(multisampleState),
 			dynamicStates(dynamicStates),
 			rasterizationState(rasterizationState),
@@ -30,14 +45,15 @@ namespace dhh::shader
 			inputAssemblyState(inputAssemblyState)
 
 		{
-			validatePipelineShaders();
+			isComputePipeline = false;
+			validateGraphicsPipelineShaders();
 			getVertexInputInfos();
 			createShaderModules();
 			createShaderStageCreateInfos();
 			gatherDescriptorInfo();
 			createDescriptorSetLayouts();
 			createPipelineLayout();
-			createPipeline();
+			createGraphicsPipeline();
 			allocateDescriptorSets();
 		}
 
@@ -49,7 +65,14 @@ namespace dhh::shader
 		VkPipelineColorBlendAttachmentState colorBlendAttachmentState;
 		VkPipelineInputAssemblyStateCreateInfo inputAssemblyState;
 
-		void createPipeline()
+		void createComputePipeline()
+		{
+			VkComputePipelineCreateInfo pipelineInfo = dhh::vk::initializer::computePipelineCreateInfo(
+				shaderStageCreateInfos[0], pipelineLayout);
+			vkCreateComputePipelines(device, 0, 1, &pipelineInfo, nullptr, &pipeline);
+		}
+
+		void createGraphicsPipeline()
 		{
 			VkPipelineDynamicStateCreateInfo dynamicStateInfo = dhh::vk::initializer::pipelineDynamicStateCreateInfo(
 				dynamicStates);
@@ -117,18 +140,13 @@ namespace dhh::shader
 		// descriptor sets index by swapchain id
 		void allocateDescriptorSets()
 		{
-			for (uint32_t i = 0; i < swapchainCount; ++i)
-			{
-				std::vector<VkDescriptorSet> descriptorSet(descriptorSetLayouts.size());
-				VkDescriptorSetAllocateInfo allocateInfo = {};
-				allocateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-				allocateInfo.descriptorPool = descriptorPool;
-				allocateInfo.descriptorSetCount = descriptorSetLayouts.size();
-				allocateInfo.pSetLayouts = descriptorSetLayouts.data();
-				vkAllocateDescriptorSets(device, &allocateInfo, descriptorSet.data());
-
-				descriptorSets.insert({i, descriptorSet});
-			}
+			descriptorSets.resize(descriptorSetLayouts.size());
+			VkDescriptorSetAllocateInfo allocateInfo = {};
+			allocateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+			allocateInfo.descriptorPool = descriptorPool;
+			allocateInfo.descriptorSetCount = descriptorSetLayouts.size();
+			allocateInfo.pSetLayouts = descriptorSetLayouts.data();
+			VK_CHECK_RESULT(vkAllocateDescriptorSets(device, &allocateInfo, descriptorSets.data()));
 		}
 
 		void createDescriptorSetLayouts()
@@ -150,24 +168,24 @@ namespace dhh::shader
 
 	public:
 		std::vector<VkDescriptorSetLayout> descriptorSetLayouts;
-		std::map<uint32_t, std::vector<VkDescriptorSet>> descriptorSets;
+		std::vector<VkDescriptorSet> descriptorSets;
 		VkPipelineLayout pipelineLayout;
 		std::map<ShaderType, VkShaderModule> shaderModules;
 		std::vector<VkPipelineShaderStageCreateInfo> shaderStageCreateInfos;
 		std::vector<VkVertexInputBindingDescription> vertexInputBindingDescriptions;
 		std::vector<VkVertexInputAttributeDescription> vertexInputAttributeDescriptions;
 		VkPipeline pipeline;
+		bool isComputePipeline;
 
 
 	private:
 		std::map<uint32_t, std::vector<VkDescriptorSetLayoutBinding>> bindings; // map<set id, bindings group>
 		VkDevice device;
 		VkDescriptorPool descriptorPool;
-		uint32_t swapchainCount;
 		VkRenderPass renderPass;
 
 		/// A pipeline can only have at most one vertex shader or fragment shader, etc.
-		void validatePipelineShaders()
+		void validateGraphicsPipelineShaders()
 		{
 			uint32_t typeCounts[sizeof(ShaderType)] = {0};
 			for (const auto& shader : shaders)

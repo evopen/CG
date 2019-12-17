@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Camera.hpp>
 #define GLFW_INCLUDE_NONE
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -66,7 +67,7 @@ public:
 	VkImageView depthImageView;
 	VkSampleCountFlagBits sampleCount = VK_SAMPLE_COUNT_1_BIT;
 	VkFormat depthImageFormat = VK_FORMAT_D32_SFLOAT;
-	std::vector<VkFramebuffer> swapchainFramebuffers;
+	std::vector<VkFramebuffer> framebuffers;
 	VkCommandPool commandPool;
 	std::vector<VkSemaphore> imageAvailableSemaphores;
 	std::vector<VkSemaphore> renderFinishedSemaphores;
@@ -83,6 +84,8 @@ public:
 	std::vector<VkBuffer> uniformBuffers;
 	std::vector<VmaAllocation> uniformBufferAllocation;
 	size_t currentFrame = 0;
+	dhh::camera::Camera camera;
+	
 
 public:
 
@@ -113,6 +116,7 @@ private:
 	void createCommandPool();
 	void createSyncObjects();
 	void createDescriptorPool();
+	void allocateCommandbuffers();
 	VkPresentModeKHR choosePresentMode();
 
 public:
