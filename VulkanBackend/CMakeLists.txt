@@ -46,5 +46,6 @@ add_subdirectory("src/snippets")
 add_subdirectory("src/10.3.asteroids_instanced")
 add_subdirectory("src/Triangle")
 add_subdirectory("src/NBody")
+add_subdirectory("src/particles")
 
 add_executable(Testing "src/TestingGround/test.cpp")

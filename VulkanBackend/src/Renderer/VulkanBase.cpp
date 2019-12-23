@@ -167,8 +167,8 @@ void VulkanBase::createLogicalDevice()
 	}
 
 	VkPhysicalDeviceFeatures features = {};
-	features.shaderFloat64 = VK_TRUE;
-	features.fillModeNonSolid = VK_TRUE;
+	features.shaderFloat64 = VK_FALSE;
+	features.fillModeNonSolid = VK_FALSE;
 	VkDeviceCreateInfo deviceCreateInfo;
 	deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	deviceCreateInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());

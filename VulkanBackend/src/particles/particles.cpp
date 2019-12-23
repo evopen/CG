@@ -11,62 +11,19 @@
 #include <array>
 #include <Camera.hpp>
 #include "Input.hpp"
+#include <random>
 
+#define BODIES_COUNT 6144
 
 struct Body
 {
-	glm::dvec3 position;
-	alignas(16) glm::dvec3 velocity;
-	alignas(8) double mass;
+	glm::vec3 position;
+	alignas(16) glm::vec3 last_position;
+	alignas(16) glm::vec3 velocity;
+	alignas(4) float mass;
 };
 
 dhh::camera::Camera camera;
-
-
-Body sun{
-	glm::vec3(-4.8569 * pow(10, 11), -3.8569 * pow(10, 11), 0),
-	glm::vec3(0, 0, 0),
-	1.988435 * pow(10, 30)
-};
-
-
-//Body mercury{
-//	glm::vec3(0.f, -57.9 * pow(10, 9), 0),
-//	glm::vec3(0.f, -57.9 * pow(10, 9), 0),
-//	glm::vec3(-47400.f, 0, 0),
-//	0.33 * pow(10, 24)
-//};
-//
-//Body venus{
-//	glm::vec3(0.f, 108.2 * pow(10, 9), 0),
-//	glm::vec3(0.f, 108.2 * pow(10, 9), 0),
-//	glm::vec3(35000.f, 0, 0),
-//	4.87 * pow(10, 24)
-//};
-//Body earth{
-//	glm::vec3(0.f, -149597870700.f, 0),
-//	glm::vec3(0.f, -149597870700.f, 0),
-//	glm::vec3(-29800.f, 0, 0),
-//	5.972 * pow(10, 24)
-//};
-//Body mars{
-//	glm::vec3(0.f, 2.2 * pow(10, 11), 0),
-//	glm::vec3(0.f, 2.2 * pow(10, 11), 0),
-//	glm::vec3(24100, 0, 0),
-//	0.642 * pow(10, 24)
-//};
-//Body jupiter{
-//	glm::vec3(0.f, -7.8569 * pow(10, 11), 0),
-//	glm::vec3(0.f, -7.8569 * pow(10, 11), 0),
-//	glm::vec3(-13000, 0, 0),
-//	1898 * pow(10, 24)
-//};
-//Body saturn{
-//	glm::vec3(0.f, 1433.5 * pow(10, 9), 0),
-//	glm::vec3(0.f, 1433.5 * pow(10, 9), 0),
-//	glm::vec3(9700.f, 0, 0),
-//	568 * pow(10, 24)
-//};
 
 
 class Triangle : public VulkanBase
@@ -98,15 +55,6 @@ class Triangle : public VulkanBase
 		VmaAllocation memory;
 		VkBuffer buffer;
 	} cameraBuffer;
-
-	struct
-	{
-		VmaAllocation memory;
-		VkBuffer buffer;
-	} trajectoryBuffer;
-
-	std::vector<glm::vec3> trajectories;
-	uint32_t trajectoryIndex = 0;
 
 	struct Transforms
 	{
@@ -170,57 +118,56 @@ public:
 		vkUpdateDescriptorSets(device, 1, &write, 0, nullptr);
 	}
 
+	std::vector<glm::vec3> attractors = {
+		glm::vec3(5.0f, 0.0f, 0.0f),
+		glm::vec3(-5.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 5.0f),
+		glm::vec3(0.0f, 0.0f, -5.0f),
+		glm::vec3(0.0f, 4.0f, 0.0f),
+		glm::vec3(0.0f, -8.0f, 0.0f),
+	};
+
+	const int PARTICLES_PER_ATTRACTOR = BODIES_COUNT / 6;
+
 	void fillBodyInitialStates()
 	{
-		//bodies.push_back(earth);
-		//bodies.push_back(sun);
-		/*bodies.push_back(mercury);
-		bodies.push_back(jupiter);
-		bodies.push_back(mars);
-		bodies.push_back(saturn);
-		bodies.push_back(venus);*/
+		bodies.resize(BODIES_COUNT);
+		std::default_random_engine rndEngine;
+		std::normal_distribution<float> rndDist(0.0f, 1.0f);
 
-		// figure-8 solution
-		/*glm::dvec2 v3 = glm::dvec2(-0.93240737, -0.86473146);
-		v3 *= 8000;
-		glm::dvec2 v2 = glm::dvec2(-v3.x / 2,-v3.y / 2);
-		glm::dvec2 v1 = v2;
+		for (uint32_t i = 0; i < static_cast<uint32_t>(attractors.size()); i++)
+		{
+			for (uint32_t j = 0; j < PARTICLES_PER_ATTRACTOR; j++)
+			{
+				auto& body = bodies[i * PARTICLES_PER_ATTRACTOR + j];
 
-		bodies.push_back({
-			glm::dvec3(0),
-			glm::dvec3(0.97000436 * pow(10, 12), -0.24308753 * pow(10, 12), 0),
-			glm::dvec3(v1, 0),
-			1 * pow(10, 30)
-		});
+				// First particle in group as heavy center of gravity
+				if (j == 0)
+				{
+					body.last_position = body.position = glm::vec3(attractors[i] * 1.5f);
+					body.velocity = glm::vec3(glm::vec3(0.0f));
+					body.mass = 90000.0f;
+				}
+				else
+				{
+					// Position					
+					glm::vec3 position(attractors[i] + glm::vec3(rndDist(rndEngine), rndDist(rndEngine), rndDist(rndEngine)) * 0.75f);
+					float len = glm::length(glm::normalize(position - attractors[i]));
+					position.y *= 2.0f - (len * len);
 
-		bodies.push_back({
-			glm::dvec3(0),
-			glm::dvec3(-0.97000436 * pow(10, 12), 0.24308753 * pow(10, 12), 0),
-			glm::dvec3(v2, 0),
-			1 * pow(10, 30)
-		});
-		bodies.push_back({
-			glm::dvec3(0),
-			glm::dvec3(0, 0, 0),
-			glm::dvec3(v3, 0),
-			1 * pow(10, 30)
-		});*/
+					// Velocity
+					glm::vec3 angular = glm::vec3(0.5f, 1.5f, 0.5f) * (((i % 2) == 0) ? 1.0f : -1.0f);
+					glm::vec3 velocity = glm::cross((position - attractors[i]), angular) + glm::vec3(rndDist(rndEngine), rndDist(rndEngine), rndDist(rndEngine) * 0.025f);
 
-		bodies.push_back({
-			glm::dvec3(1 * pow(10, 11), 3 * pow(10, 11), 0),
-			glm::dvec3(0),
-			3 * pow(10, 31)
-		});
-		bodies.push_back({
-			glm::dvec3(-2 * pow(10, 11), -1 * pow(10, 11), 0),
-			glm::dvec3(0),
-			4 * pow(10, 31)
-		});
-		bodies.push_back({
-			glm::dvec3(1 * pow(10, 11), -1 * pow(10, 11), 0),
-			glm::dvec3(0),
-			5 * pow(10, 31)
-		});
+					float mass = (rndDist(rndEngine) * 0.5f + 0.5f) * 75.0f;
+					body.position = body.last_position = glm::vec3(position);
+					body.velocity = glm::vec4(velocity, 0.0f);
+					body.mass = mass;
+				}
+
+				
+			}
+		}
 	}
 
 	void writeComputeDescriptorSet()
@@ -261,13 +208,11 @@ public:
 
 		void* data;
 		vmaMapMemory(allocator, computeBuffer.memory, &data);
-		std::vector<Body> fuck(bodies.size());
-		memcpy(fuck.data(), data, sizeof(Body) * bodies.size());
+		std::vector<Body> fuck(BODIES_COUNT);
+		memcpy(fuck.data(), data, sizeof(Body) * BODIES_COUNT);
 		vmaUnmapMemory(allocator, computeBuffer.memory);
 
-		std::cout << glm::to_string(fuck[0].position) << "\n";
-		std::cout << glm::to_string(fuck[1].position) << "\n";
-		std::cout << glm::to_string(fuck[2].position) << "\n";
+		std::cout << glm::to_string(fuck[5000].position) << "\n";
 	}
 
 	VkCommandBuffer computeCmdBuf;
@@ -282,34 +227,29 @@ public:
 		vkBeginCommandBuffer(computeCmdBuf, &beginInfo);
 
 		// calculate
-		for (int i = 0; i < 1; ++i)
-		{
-			vkCmdBindPipeline(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, computePipe->pipeline);
-			vkCmdBindDescriptorSets(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, computePipe->pipelineLayout, 0, 1,
-			                        computePipe->descriptorSets.data(), 0, nullptr);
-			vkCmdDispatch(computeCmdBuf, 1, 1, 1);
 
-			VkBufferMemoryBarrier barrier = {};
-			barrier.buffer = computeBuffer.buffer;
-			barrier.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
-			barrier.size = VK_WHOLE_SIZE;
-			barrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
-			barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-			vkCmdPipelineBarrier(computeCmdBuf, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-			                     VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-			                     VK_NULL_HANDLE, 0, nullptr,
-			                     1, &barrier, VK_NULL_HANDLE, nullptr);
+		vkCmdBindPipeline(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, computePipe->pipeline);
+		vkCmdBindDescriptorSets(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, computePipe->pipelineLayout, 0, 1,
+		                        computePipe->descriptorSets.data(), 0, nullptr);
+		vkCmdDispatch(computeCmdBuf, BODIES_COUNT / 256, 1, 1);
 
-			// cache old data
-			//vkCmdBindPipeline(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, cachePipe->pipeline);
-			//vkCmdBindDescriptorSets(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, cachePipe->pipelineLayout, 0, 1,
-			//                        cachePipe->descriptorSets.data(), 0, nullptr);
-			//vkCmdDispatch(computeCmdBuf, 1, 1, 1);
-			//vkCmdPipelineBarrier(computeCmdBuf, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-			//	VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-			//	VK_NULL_HANDLE, 0, nullptr,
-			//	1, &barrier, VK_NULL_HANDLE, nullptr);
-		}
+		VkBufferMemoryBarrier barrier = {};
+		barrier.buffer = computeBuffer.buffer;
+		barrier.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
+		barrier.size = VK_WHOLE_SIZE;
+		barrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
+		barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+		vkCmdPipelineBarrier(computeCmdBuf, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+		                     VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+		                     VK_NULL_HANDLE, 0, nullptr,
+		                     1, &barrier, VK_NULL_HANDLE, nullptr);
+
+		// cache old data
+		vkCmdBindPipeline(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, cachePipe->pipeline);
+		vkCmdBindDescriptorSets(computeCmdBuf, VK_PIPELINE_BIND_POINT_COMPUTE, cachePipe->pipelineLayout, 0, 1,
+		                        cachePipe->descriptorSets.data(), 0, nullptr);
+		vkCmdDispatch(computeCmdBuf, BODIES_COUNT / 256, 1, 1);
+
 		vkEndCommandBuffer(computeCmdBuf);
 	}
 
@@ -326,11 +266,9 @@ public:
 
 	void createVertexBuffer()
 	{
-		createBuffer(sizeof(glm::vec3) * bodies.size(), VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VMA_MEMORY_USAGE_CPU_ONLY,
+		createBuffer(sizeof(glm::vec3) * 2 * BODIES_COUNT, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VMA_MEMORY_USAGE_CPU_ONLY,
 		             vertices.buffer, vertices.memory);
-		createBuffer(sizeof(glm::vec3) * 100000, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VMA_MEMORY_USAGE_CPU_ONLY,
-		             trajectoryBuffer.buffer, trajectoryBuffer.memory);
-		trajectories.resize(100000);
+		positions.resize(BODIES_COUNT);
 	}
 
 	void createComputePipeline()
@@ -429,12 +367,7 @@ public:
 			VkDeviceSize offsets[1] = {0};
 			vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, &vertices.buffer, offsets);
 
-			// Draw indexed triangle
-			vkCmdDraw(commandBuffers[i], bodies.size(), 1, 0, 0);
-
-			// draw trajectory
-			vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, &trajectoryBuffer.buffer, offsets);
-			vkCmdDraw(commandBuffers[i], trajectories.size(), 1, 0, 0);
+			vkCmdDraw(commandBuffers[i], BODIES_COUNT, 1, 0, 0);
 
 			vkCmdEndRenderPass(commandBuffers[i]);
 
@@ -445,31 +378,39 @@ public:
 		}
 	}
 
+	bool colorSet = false;
+
+	struct vertex
+	{
+		glm::vec3 pos;
+		glm::vec3 color;
+	};
+
+	std::vector<vertex> positions;
+
 	void updateVertexBuffer()
 	{
-		const double scale = 1 / 300000000000.f;
 		void* data;
 		vmaMapMemory(allocator, computeBuffer.memory, &data);
-		std::vector<Body> fuck(bodies.size());
-		memcpy(fuck.data(), data, sizeof(Body) * bodies.size());
+		std::vector<Body> fuck(BODIES_COUNT);
+		memcpy(fuck.data(), data, sizeof(Body) * BODIES_COUNT);
 		vmaUnmapMemory(allocator, computeBuffer.memory);
+		std::default_random_engine rndEngine;
+		std::normal_distribution<float> rndDist(0.0f, 1.0f);
 
-		std::vector<glm::vec3> positions(bodies.size());
-		for (int i = 0; i < bodies.size(); ++i)
+
+		for (int i = 0; i < BODIES_COUNT; ++i)
 		{
-			positions[i] = fuck[i].position * scale;
-			trajectories[trajectoryIndex * 3 + i] = positions[i];
-			/*trajectories[trajectoryIndex * 6 + i * 2 + 1] = glm::vec3(1,0,0);*/
+			positions[i].pos = fuck[i].position;
+			if (!colorSet)
+				positions[i].color = glm::vec3(rndDist(rndEngine), rndDist(rndEngine), rndDist(rndEngine));
 		}
-		++trajectoryIndex;
-		
-		vmaMapMemory(allocator, vertices.memory, &data);
-		memcpy(data, positions.data(), sizeof(glm::vec3) * bodies.size());
-		vmaUnmapMemory(allocator, vertices.memory);
+		std::cout << glm::to_string(positions[6000].pos) << "\n";
+		colorSet = true;
 
-		vmaMapMemory(allocator, trajectoryBuffer.memory, &data);
-		memcpy(data, trajectories.data(), sizeof(glm::vec3) * trajectories.size());
-		vmaUnmapMemory(allocator, trajectoryBuffer.memory);
+		vmaMapMemory(allocator, vertices.memory, &data);
+		memcpy(data, positions.data(), sizeof(vertex) * BODIES_COUNT);
+		vmaUnmapMemory(allocator, vertices.memory);
 	}
 };
 

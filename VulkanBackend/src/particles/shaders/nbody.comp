@@ -1,0 +1,48 @@
+#version 450
+
+#define BODIES_COUNT 6144
+
+// STEP_LENGTH is how many second every simulation step
+#define STEP_LENGTH 1
+
+layout (local_size_x = 256, local_size_y = 1, local_size_z = 1) in;
+
+const float G = 0.002;
+
+struct Body {
+	vec3 position;
+	vec3 last_position;
+	vec3 velocity;
+	float mass;
+};
+
+layout (set = 0, binding = 0) buffer buf_block {
+	Body bodies[BODIES_COUNT];
+};
+
+
+
+void iterate(uint index, float step_length) 
+{
+	vec4 acceleration = vec4(0.0);
+	for (int j = 0; j < BODIES_COUNT; j++)
+	{
+		if(j == index) {
+			continue;
+		}
+		vec3 len = bodies[j].last_position - bodies[index].position;
+		acceleration.xyz += 100 * len * bodies[j].mass * 10000 / pow(dot(len, len) + 1000, 2);
+	}
+	bodies[index].velocity += 0.0001 * acceleration.xyz;
+	bodies[index].position += 0.0001 * bodies[index].velocity;
+}
+
+void main() {
+	// index for itself
+	uint index = gl_GlobalInvocationID.x;
+
+	if(index >= BODIES_COUNT)
+		return;
+
+	iterate(index, STEP_LENGTH);
+}
