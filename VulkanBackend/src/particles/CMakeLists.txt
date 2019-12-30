@@ -9,3 +9,4 @@ set(TARGET_NAME "particles")
 
 # Add source to this project's executable.
 add_executable (${TARGET_NAME} "${TARGET_NAME}.cpp" ${RENDERER_SOURCES})
+target_compile_definitions(${TARGET_NAME} PUBLIC SHADER_DIR="${CMAKE_CURRENT_LIST_DIR}/shaders")

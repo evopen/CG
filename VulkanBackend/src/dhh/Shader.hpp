@@ -66,6 +66,14 @@ namespace dhh::shader
 
 	inline std::filesystem::path findShaderDirectory()
 	{
+#ifdef SHADER_DIR
+		std::filesystem::path path(SHADER_DIR);
+		if(!std::filesystem::is_empty(path))
+		{
+			return path;
+		}
+#endif
+
 		std::filesystem::path current_path = std::filesystem::current_path();
 		const std::string ShadersDirectoryName = "shaders";
 		while (true)
