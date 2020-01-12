@@ -50,7 +50,7 @@ inline VkFormat get_vk_format(spirv_cross::SPIRType type)
 	case spirv_cross::SPIRType::Float:
 		return float_types[type.vecsize - 1];
 	default:
-		throw std::exception("Cannot find VK_Format");
+		throw std::runtime_error("Cannot find VK_Format");
 	}
 }
 
@@ -64,7 +64,7 @@ inline std::vector<uint32_t> get_spirv_code(std::filesystem::path path)
 		GlslText.data(), shaderc_glsl_infer_from_source, path.filename().string().c_str(), Options);
 	if (module.GetCompilationStatus() != shaderc_compilation_status_success)
 	{
-		throw std::exception("Failed to compile shader");
+		throw std::runtime_error("Failed to compile shader");
 	}
 	return {module.cbegin(), module.cend()};
 }
