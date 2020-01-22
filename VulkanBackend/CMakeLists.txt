@@ -27,8 +27,6 @@ find_package(unofficial-vulkan-memory-allocator CONFIG REQUIRED)
 link_libraries(unofficial::vulkan-memory-allocator::vulkan-memory-allocator)
 find_package(glm CONFIG REQUIRED)
 link_libraries(glm)
-find_package(Catch2 CONFIG REQUIRED)
-link_libraries(Catch2::Catch2)
 
 find_package(spirv_cross_core CONFIG REQUIRED)
 link_libraries(spirv-cross-core)
@@ -43,7 +41,6 @@ find_library(SHADERC_LIBRARY shaderc_combined)
 link_libraries(${SHADERC_LIBRARY})
 
 # Include sub-projects.
-add_subdirectory("src/snippets")
 add_subdirectory("src/10.3.asteroids_instanced")
 add_subdirectory("src/Triangle")
 add_subdirectory("src/NBody")
